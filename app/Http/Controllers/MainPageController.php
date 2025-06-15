@@ -23,6 +23,43 @@ class MainPageController extends Controller
     const CATEGORY_PERDA = 'Peraturan Daerah';
     const CATEGORY_BUPATI = 'Peraturan Bupati';
 
+    /**
+     * Get data from cache with Redis fallback to regular cache
+     *
+     * @param string $key
+     * @return mixed|null
+     */
+    private function getFromCache($key)
+    {
+        try {
+            if (Redis::exists($key)) {
+                return unserialize(Redis::get($key));
+            }
+        } catch (\Exception $e) {
+            Log::warning('Redis connection failed, falling back to regular cache: ' . $e->getMessage());
+        }
+
+        return Cache::get($key);
+    }
+
+    /**
+     * Store data in cache with Redis fallback to regular cache
+     *
+     * @param string $key
+     * @param mixed $value
+     * @param int $ttl
+     * @return void
+     */
+    private function storeInCache($key, $value, $ttl)
+    {
+        try {
+            Redis::setex($key, $ttl, serialize($value));
+        } catch (\Exception $e) {
+            Log::warning('Redis connection failed, falling back to regular cache: ' . $e->getMessage());
+            Cache::put($key, $value, $ttl);
+        }
+    }
+
     public function __construct()
     {
         $this->client = new Client([
@@ -154,9 +191,10 @@ class MainPageController extends Controller
     {
         $cacheKey = "news_items_page_{$page}_per_page_{$perPage}";
 
-        // Try to get from Redis first
-        if (Redis::exists($cacheKey)) {
-            return unserialize(Redis::get($cacheKey));
+        // Try to get from cache (Redis or regular cache)
+        $cachedData = $this->getFromCache($cacheKey);
+        if ($cachedData) {
+            return $cachedData;
         }
 
         try {
@@ -210,8 +248,8 @@ class MainPageController extends Controller
                 ['path' => request()->url(), 'query' => request()->query()]
             );
 
-            // Store in Redis with expiration
-            Redis::setex($cacheKey, $this->cacheTime, serialize($paginator));
+            // Store in cache (Redis or regular cache)
+            $this->storeInCache($cacheKey, $paginator, $this->cacheTime);
 
             return $paginator;
 
@@ -227,11 +265,17 @@ class MainPageController extends Controller
     public function clearNewsCache()
     {
         $pattern = 'news_items_page_*';
-        $keys = Redis::keys($pattern);
-
-        if (!empty($keys)) {
-            Redis::del($keys);
+        try {
+            $keys = Redis::keys($pattern);
+            if (!empty($keys)) {
+                Redis::del($keys);
+            }
+        } catch (\Exception $e) {
+            Log::warning('Redis connection failed while clearing news cache: ' . $e->getMessage());
         }
+
+        // Clear regular cache as well
+        Cache::forget($pattern);
 
         return response()->json(['message' => 'News cache cleared successfully']);
     }
@@ -247,9 +291,10 @@ class MainPageController extends Controller
     {
         $cacheKey = "gallery_items_page_{$page}_per_page_{$perPage}";
 
-        // Try to get from Redis first
-        if (Redis::exists($cacheKey)) {
-            return unserialize(Redis::get($cacheKey));
+        // Try to get from cache (Redis or regular cache)
+        $cachedData = $this->getFromCache($cacheKey);
+        if ($cachedData) {
+            return $cachedData;
         }
 
         try {
@@ -325,8 +370,8 @@ class MainPageController extends Controller
                 ['path' => request()->url(), 'query' => request()->query()]
             );
 
-            // Store in Redis with expiration
-            Redis::setex($cacheKey, $this->cacheTime, serialize($paginator));
+            // Store in cache (Redis or regular cache)
+            $this->storeInCache($cacheKey, $paginator, $this->cacheTime);
 
             return $paginator;
 
@@ -341,9 +386,10 @@ class MainPageController extends Controller
     {
         $cacheKey = "video_items_page_{$page}_per_page_{$perPage}";
 
-        // Try to get from Redis first
-        if (Redis::exists($cacheKey)) {
-            return unserialize(Redis::get($cacheKey));
+        // Try to get from cache (Redis or regular cache)
+        $cachedData = $this->getFromCache($cacheKey);
+        if ($cachedData) {
+            return $cachedData;
         }
 
         try {
@@ -392,8 +438,8 @@ class MainPageController extends Controller
                 ['path' => request()->url(), 'query' => request()->query()]
             );
 
-            // Store in Redis with expiration
-            Redis::setex($cacheKey, $this->cacheTime, serialize($paginator));
+            // Store in cache (Redis or regular cache)
+            $this->storeInCache($cacheKey, $paginator, $this->cacheTime);
 
             return $paginator;
 
@@ -409,11 +455,17 @@ class MainPageController extends Controller
     public function clearVideoCache()
     {
         $pattern = 'video_items_page_*';
-        $keys = Redis::keys($pattern);
-
-        if (!empty($keys)) {
-            Redis::del($keys);
+        try {
+            $keys = Redis::keys($pattern);
+            if (!empty($keys)) {
+                Redis::del($keys);
+            }
+        } catch (\Exception $e) {
+            Log::warning('Redis connection failed while clearing video cache: ' . $e->getMessage());
         }
+
+        // Clear regular cache as well
+        Cache::forget($pattern);
 
         return response()->json(['message' => 'Video cache cleared successfully']);
     }
