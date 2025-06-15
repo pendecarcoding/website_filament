@@ -1,0 +1,50 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+
+.fi-sidebar-nav::-webkit-scrollbar{
+    display: none;
+}
+
+.fi-sidebar-nav{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+aside.fi-sidebar{
+    @apply bg-gradient-to-b from-slate-700 to-slate-800 dark:bg-gradient-to-b dark:from-gray-800 dark:to-gray-900;
+}
+
+span.fi-sidebar-item-label{
+   --tw-text-opacity: 1;
+    color: rgb(255, 255, 255);
+}
+.curator-picker-grid{
+    display: flex;
+    gap:20px;
+}
+
+.fi-sidebar-item-active > a {
+    @apply bg-orange-500 text-blue-800;
+}
+
+.fi-sidebar-item .fi-sidebar-item-icon {
+    @apply text-white; /* Change to your desired color */
+}
+
+/* Change background and text color on hover */
+.fi-sidebar-item:hover > a {
+    @apply bg-neutral-800 text-blue-800;
+}
+
+.hover\:bg-custom-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: #FF9800;
+}
+
+.bg-custom-600 {
+    --tw-bg-opacity: 1;
+    background-color: #FF9800;
+}
+
