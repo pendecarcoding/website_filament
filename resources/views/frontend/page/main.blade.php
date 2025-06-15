@@ -83,7 +83,7 @@
                         <div class="about-left wow fadeInLeft" data-wow-delay=".25s">
                             <div class="about-img">
                                 <div class="row g-4">
-                                    <img class="img-1" src="assets/img/jdih-image/sample-bupati.png" alt="">
+                                    <img class="img-1" src="{{Storage::url(setting('site_profile'))}}" alt="">
                                 </div>
                             </div>
                         </div>
