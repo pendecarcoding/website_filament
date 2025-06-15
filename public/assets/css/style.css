@@ -813,6 +813,9 @@ label {
         display: flex;
         position: relative;
     }
+    .footer-newsletter {
+        padding-top: 1%;
+    }
 }
 
 @media (min-width: 1200px) {
