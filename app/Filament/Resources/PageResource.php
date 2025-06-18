@@ -21,6 +21,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Filament\Forms\Components\RichEditor;
 
 class PageResource extends Resource
 {
@@ -71,7 +72,23 @@ class PageResource extends Resource
                 ->live()
                 ->afterStateUpdated(fn($state, callable $set) => $set ('slug', Str::slug($state))),
                 TextInput::make('slug')->required(),
-                Textarea::make('content')->required(),
+                RichEditor::make('content')
+                ->toolbarButtons([
+                    'attachFiles',
+                    'blockquote',
+                    'bold',
+                    'bulletList',
+                    'codeBlock',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'link',
+                    'orderedList',
+                    'redo',
+                    'strike',
+                    'underline',
+                    'undo',
+                ])
 
                  ])->columnSpan(8),
 

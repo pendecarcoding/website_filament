@@ -816,6 +816,9 @@ label {
     .footer-newsletter {
         padding-top: 1%;
     }
+    .about-left {
+        margin-right: 1px;
+    }
 }
 
 @media (min-width: 1200px) {

@@ -271,10 +271,10 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                     <img src="assets/img/icon/health.svg" alt="Statistik">
                 </div>
                 <div class="department-info">
-                    <h4 class="department-title"><a href="academic-single.html">Statistik</a></h4>
+                    <h4 class="department-title"><a href="{{ route('statistik') }}">Statistik</a></h4>
                     <p>Data dan statistik yang mendukung kebijakan publik berbasis fakta.</p>
                     <div class="department-btn">
-                        <a href="academic-single.html">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                        <a href="{{ route('statistik') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
@@ -287,10 +287,10 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                     <img src="assets/img/icon/art.svg" alt="Dasar Hukum">
                 </div>
                 <div class="department-info">
-                    <h4 class="department-title"><a href="academic-single.html">Dasar Hukum</a></h4>
+                    <h4 class="department-title"><a href="{{ route('page', 'dasar-hukum') }}">Dasar Hukum</a></h4>
                     <p>Referensi hukum utama yang menjadi landasan kebijakan dan regulasi.</p>
                     <div class="department-btn">
-                        <a href="academic-single.html">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                        <a href="{{ route('page', 'dasar-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
@@ -303,10 +303,10 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                     <img src="assets/img/icon/information.svg" alt="FAQ">
                 </div>
                 <div class="department-info">
-                    <h4 class="department-title"><a href="academic-single.html">FAQ</a></h4>
+                    <h4 class="department-title"><a href="{{ route('faq') }}">FAQ</a></h4>
                     <p>Pertanyaan umum yang sering ditanyakan terkait layanan dan sistem.</p>
                     <div class="department-btn">
-                        <a href="academic-single.html">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                        <a href="{{ route('faq') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
