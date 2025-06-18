@@ -10,7 +10,11 @@ class PageController extends Controller
     public function index(Request $request, $slug)
     {
         $page = Page::where('slug', $slug)->first();
-        return view('frontend.page.page-noside', compact('page'));
+        if (!$page) {
+            return redirect()->route('home');
+        }else{
+            return view('frontend.page.page-noside', compact('page'));
+        }
     }
     public function faq(Request $request)
     {
