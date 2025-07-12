@@ -48,7 +48,7 @@ class ProdukHukumService
                     continue;
                 }
             }
-
+            $jenis   = ($item['jenis'] === null) ? 'Peraturan Bupati' : $item['jenis'];
             $category = Category::where('name', $item['jenis'])->first();
 
             ProdukHukum::updateOrCreate(
