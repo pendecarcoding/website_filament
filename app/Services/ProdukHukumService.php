@@ -23,23 +23,29 @@ class ProdukHukumService
         $dataList = $response->json();
 
         foreach ($dataList as $item) {
-            $fileUrl = $item['urlDownload'];
+            $fileUrl = $item['urlDownload'] ?? null;
+
+            if (empty($fileUrl)) {
+                Log::warning("Missing file URL for item: " . json_encode($item));
+                continue;
+            }
+
             $fileName = 'produk_hukum/' . basename($fileUrl);
 
-            // Download the file if not exists
+            // Download file if it doesn't exist
             if (!Storage::disk('public')->exists($fileName)) {
                 try {
-                    $response = Http::timeout(60)->get($fileUrl);
+                    $downloadResponse = Http::timeout(60)->get($fileUrl);
 
-                    if ($response->successful()) {
-                        Storage::disk('public')->put($fileName, $response->body());
+                    if ($downloadResponse->successful()) {
+                        Storage::disk('public')->put($fileName, $downloadResponse->body());
                     } else {
-                        Log::error("Failed to download file. URL: {$fileUrl}. HTTP status: {$response->status()}");
-                        continue; // skip to next item
+                        Log::error("Failed to download file. URL: {$fileUrl}. HTTP status: {$downloadResponse->status()}");
+                        continue;
                     }
                 } catch (\Exception $e) {
                     Log::error("Exception while downloading file: {$fileUrl}. Error: {$e->getMessage()}");
-                    continue; // skip to next item
+                    continue;
                 }
             }
 
