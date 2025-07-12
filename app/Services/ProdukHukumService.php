@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProdukHukumService
 {
-    public function fetchFromJsonAndStore()
+    public function fetchFromJsonAndStore($year)
     {
         $response = Http::timeout(30)->get('https://jdih.bengkaliskab.go.id/integrasijdihn/jdihbengkalis/index2.php');
 
@@ -20,7 +20,21 @@ class ProdukHukumService
             throw new \Exception("Failed to fetch data.");
         }
 
-        $dataList = $response->json();
+        if ($year === 'ALL') {
+            $dataList = $response->json();
+        } else {
+            $dataList = collect($response->json())
+                ->filter(function ($item) use ($year) {
+                    return
+                        !empty($item['tahun_pengundangan']) &&
+                        str_starts_with($item['tahun_pengundangan'], $year);
+                })
+                ->values();
+        }
+
+        //
+
+
 
         foreach ($dataList as $item) {
             $fileUrl = $item['urlDownload'] ?? null;

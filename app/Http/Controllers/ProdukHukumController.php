@@ -14,10 +14,10 @@ class ProdukHukumController extends Controller
         return view('frontend.detailpage.peraturan.index', compact('produkHukum'));
     }
 
-    public function importJson()
+    public function importJson($year)
     {
         try {
-            $message = app(ProdukHukumService::class)->fetchFromJsonAndStore();
+            $message = app(ProdukHukumService::class)->fetchFromJsonAndStore($year);
             return response()->json(['message' => $message]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
