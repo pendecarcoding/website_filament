@@ -50,9 +50,11 @@
                              <div class="subscribe-form">
                                  <img src="{{asset('assets/img/slider/green2.png')}}" alt="">
                              </div>
-
-                             <!-- Histats.com  (div with counter) -->
-                             <div id="histats_counter"></div>
+                             <br>
+                             <center>
+                                 <!-- Histats.com  (div with counter) -->
+                                 <div id="histats_counter"></div>
+                             </center>
                              <!-- Histats.com  START  (aync)-->
                              <script type="text/javascript">
                                  var _Hasync = _Hasync || [];
