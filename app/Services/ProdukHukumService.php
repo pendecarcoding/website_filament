@@ -49,7 +49,7 @@ class ProdukHukumService
                 }
             }
             $jenis   = ($item['jenis'] === null) ? 'Peraturan Bupati' : $item['jenis'];
-            $category = Category::where('name', $item['jenis'])->first();
+            $category = Category::where('name', $jenis)->first();
 
             ProdukHukum::updateOrCreate(
                 ['no_peraturan' => $item['noPeraturan']],
