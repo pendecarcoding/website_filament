@@ -26,4 +26,4 @@ Route::get('/statistik', [App\Http\Controllers\Frontend\StatistikController::cla
 Route::match(['get', 'post'], '/page/{slug}', [PageController::class, 'index'])->name('page');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
-Route::get('/import-produkhukum', [ProdukHukumController::class, 'importJson']);
+Route::get('/import-produkhukum/{year}', [ProdukHukumController::class, 'importJson']);
