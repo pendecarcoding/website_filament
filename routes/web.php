@@ -23,5 +23,7 @@ Route::get('/video', [MainPageController::class, 'video'])->name('video');
 Route::get('/produk-hukum', [MainPageController::class, 'produkHukum'])->name('produk-hukum');
 Route::get('/view/produk-hukum/detail/{id}', [ProdukHukumController::class, 'detail'])->name('produk-hukum.detail');
 Route::get('/statistik', [App\Http\Controllers\Frontend\StatistikController::class, 'index'])->name('statistik');
-Route::match(['get','post'],'/page/{slug}',[PageController::class,'index'])->name('page');
+Route::match(['get', 'post'], '/page/{slug}', [PageController::class, 'index'])->name('page');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+
+Route::get('/import-produkhukum', [ProdukHukumController::class, 'importJson']);
