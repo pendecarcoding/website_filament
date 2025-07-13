@@ -6,142 +6,142 @@
 
 <main class="main">
 
-        <!-- hero slider -->
-        <div class="hero-section">
-            <div class="hero-slider owl-carousel owl-theme">
-                @foreach ($sliders as $slider)
-                <div class="hero-single" style="height: 58vh;background: url({{ asset('storage/' . $slider->image_path) }})">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-md-12 col-lg-7">
+    <!-- hero slider -->
+    <div class="hero-section">
+        <div class="hero-slider owl-carousel owl-theme">
+            @foreach ($sliders as $slider)
+            <div class="hero-single" style="height: 58vh;background: url({{ asset('storage/' . $slider->image_path) }})">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-12 col-lg-7">
                             <div class="hero-content">
 
-                                    <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
                                     {{ $slider->title }}
-                                    </h1>
-                                    <p data-animation="fadeInLeft" data-delay=".75s">
-                                       Kabupaten Bengkalis
-                                    </p>
-                                    <!-- <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                </h1>
+                                <p data-animation="fadeInLeft" data-delay=".75s">
+                                    Kabupaten Bengkalis
+                                </p>
+                                <!-- <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
                                         <a href="about.html" class="theme-btn">About More<i
                                                 class="fas fa-arrow-right-long"></i></a>
                                         <a href="contact.html" class="theme-btn theme-btn2">Learn More<i
                                                 class="fas fa-arrow-right-long"></i></a>
                                     </div> -->
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @endforeach
-
-
-
             </div>
+            @endforeach
+
+
+
         </div>
-        <!-- hero slider end -->
-        <div class="hero-section searh-wrapper" >
+    </div>
+    <!-- hero slider end -->
+    <div class="hero-section searh-wrapper">
         <form method="GET" action="{{ route('produk-hukum') }}" accept-charset="UTF-8" autocomplete="off">
-                           <div class="banner-form-box">
-                              <div class="banner-form-input">
-                                 <input name="search" type="text" placeholder="Kata Kunci" value="{{ request('search') }}">
-                              </div>
-                               <div class="banner-form-input">
-                                 <input type="text" name="nomor" placeholder="Nomor" value="{{ request('nomor') }}">
-                              </div>
-                               <div class="banner-form-input">
-                                 <select name="tahun" class="form-select select2" data-placeholder="Pilih Tahun">
-                                   <option value="">Pilih Tahun</option>
-                                   @for($i = 2016; $i <= date('Y'); $i++)
-                                   <option value="{{ $i }}" {{ request('tahun') == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                   @endfor
-                                 </select>
-                              </div>
-                              <div class="banner-form-input">
-                                 <select class="form-select select2" name="kategori" data-placeholder="Kategori Produk Hukum">
-                                    <option value="">Pilih Kategori</option>
-                                    @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ request('kategori') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                    @endforeach
-                                 </select>
-                              </div>
-                              <div class="banner-form-input">
-                                 <button type="submit"><i class="fa fa-search"></i></button>
-                              </div>
-                           </div>
-                        </form>
-                        </div>
+            <div class="banner-form-box">
+                <div class="banner-form-input">
+                    <input name="search" type="text" placeholder="Kata Kunci" value="{{ request('search') }}">
+                </div>
+                <div class="banner-form-input">
+                    <input type="text" name="nomor" placeholder="Nomor" value="{{ request('nomor') }}">
+                </div>
+                <div class="banner-form-input">
+                    <select name="tahun" class="form-select select2" data-placeholder="Pilih Tahun">
+                        <option value="">Pilih Tahun</option>
+                        @for($i = 2016; $i <= date('Y'); $i++)
+                            <option value="{{ $i }}" {{ request('tahun') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                            @endfor
+                    </select>
+                </div>
+                <div class="banner-form-input">
+                    <select class="form-select select2" name="kategori" data-placeholder="Kategori Produk Hukum">
+                        <option value="">Pilih Kategori</option>
+                        @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ request('kategori') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="banner-form-input">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 
 
-        <!-- about area -->
-        <div class="about-area py-120">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="about-left wow fadeInLeft" data-wow-delay=".25s">
-                            <div class="about-img">
-                                <div class="row g-4">
-                                    <img class="img-1" src="{{Storage::url(setting('site_profile'))}}" alt="">
-                                </div>
+    <!-- about area -->
+    <div class="about-area py-120">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-left wow fadeInLeft" data-wow-delay=".25s">
+                        <div class="about-img">
+                            <div class="row g-4">
+                                <img class="img-1" src="{{Storage::url(setting('site_profile'))}}" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="about-right wow fadeInRight" data-wow-delay=".25s">
-                            <div class="site-heading mb-3">
-                                <span class="site-title-tagline">JDIH PEMERINTAH KABUPATEN BENGKALIS</span>
-                                <h2 class="site-title">
-                                    Selayang Pandang
-                                </h2>
-                            </div>
-                            <p class="about-text">
-                               Bagian Hukum Sekretariat Daerah Kabupaten Bengkalis merupakan unit kerja yang berperan strategis dalam pengelolaan Jaringan Dokumentasi dan Informasi Hukum (JDIH). Sebagai bagian dari sistem nasional JDIH, kami bertugas menyediakan akses informasi hukum yang lengkap, akurat, dan dapat diandalkan untuk mendukung transparansi, akuntabilitas, serta kepastian hukum di lingkungan Pemerintah Kabupaten Bengkalis. <br> <br> Melalui platform ini, masyarakat dapat dengan mudah memperoleh berbagai produk hukum daerah yang telah diterbitkan oleh Pemerintah Kabupaten Bengkalis.
-                            </p>
-                            <br>
-                            <p class="about-text">Informasi Produk Hukum
-Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, yang meliputi:</p>
-                            <div class="about-content">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="about-item">
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-right wow fadeInRight" data-wow-delay=".25s">
+                        <div class="site-heading mb-3">
+                            <span class="site-title-tagline">JDIH PEMERINTAH KABUPATEN BENGKALIS</span>
+                            <h2 class="site-title">
+                                Selayang Pandang
+                            </h2>
+                        </div>
+                        <p class="about-text">
+                            Bagian Hukum Sekretariat Daerah Kabupaten Bengkalis merupakan unit kerja yang berperan strategis dalam pengelolaan Jaringan Dokumentasi dan Informasi Hukum (JDIH). Sebagai bagian dari sistem nasional JDIH, kami bertugas menyediakan akses informasi hukum yang lengkap, akurat, dan dapat diandalkan untuk mendukung transparansi, akuntabilitas, serta kepastian hukum di lingkungan Pemerintah Kabupaten Bengkalis. <br> <br> Melalui platform ini, masyarakat dapat dengan mudah memperoleh berbagai produk hukum daerah yang telah diterbitkan oleh Pemerintah Kabupaten Bengkalis.
+                        </p>
+                        <br>
+                        <p class="about-text">Informasi Produk Hukum
+                            Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, yang meliputi:</p>
+                        <div class="about-content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="about-item">
 
-                                            <div class="about-item-icon">
-                                                <img src="assets/img/icon/open-book.svg" alt="">
-                                            </div>
-
-                                            <div class="about-item-content">
-                                                <h5>Informasi Peraturan Daerah Pemerintah Kabupaten Bengkalis</h5>
-                                                <p>Telusuri dan unduh Peraturan Daerah (Perda) yang mengatur berbagai aspek penyelenggaraan pemerintahan dan pembangunan daerah.</p>
-                                            </div>
+                                        <div class="about-item-icon">
+                                            <img src="assets/img/icon/open-book.svg" alt="">
                                         </div>
-                                        <div class="about-item">
-                                            <div class="about-item-icon">
-                                                <img src="assets/img/icon/global-education.svg" alt="">
-                                            </div>
-                                            <div class="about-item-content">
-                                                <h5>Peraturan Bupati Kabupaten Bengkalis</h5>
-                                                <p>Akses dokumen Peraturan Bupati (Perbup) yang merupakan pelaksanaan teknis dari Perda dan pengaturan kebijakan internal pemerintahan.</p>
-                                            </div>
+
+                                        <div class="about-item-content">
+                                            <h5>Informasi Peraturan Daerah Pemerintah Kabupaten Bengkalis</h5>
+                                            <p>Telusuri dan unduh Peraturan Daerah (Perda) yang mengatur berbagai aspek penyelenggaraan pemerintahan dan pembangunan daerah.</p>
                                         </div>
                                     </div>
-
+                                    <div class="about-item">
+                                        <div class="about-item-icon">
+                                            <img src="assets/img/icon/global-education.svg" alt="">
+                                        </div>
+                                        <div class="about-item-content">
+                                            <h5>Peraturan Bupati Kabupaten Bengkalis</h5>
+                                            <p>Akses dokumen Peraturan Bupati (Perbup) yang merupakan pelaksanaan teknis dari Perda dan pengaturan kebijakan internal pemerintahan.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- about area end -->
+    </div>
+    <!-- about area end -->
 
 
 
-        <!-- feature area -->
-        <div class="feature-area pt-10 pb-100">
-            <!-- <div class="container">
+    <!-- feature area -->
+    <div class="feature-area pt-10 pb-100">
+        <!-- <div class="container">
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-2">
                         <div class="feature-item wow fadeInUp" data-wow-delay=".25s">
@@ -206,299 +206,300 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                     </div>
                 </div>
             </div> -->
-            <div class="container">
-    <div class="row">
-        <div class="col-lg-6 mx-auto">
-            <div class="site-heading text-center">
-                <h2 class="site-title">Daftar<span> Menu</span></h2>
-                <p>Berikut adalah daftar menu yang memudahkan Anda dalam mengakses informasi penting terkait produk hukum, regulasi daerah, dan data statistik secara cepat dan terstruktur.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="site-heading text-center">
+                        <h2 class="site-title">Daftar<span> Menu</span></h2>
+                        <p>Berikut adalah daftar menu yang memudahkan Anda dalam mengakses informasi penting terkait produk hukum, regulasi daerah, dan data statistik secara cepat dan terstruktur.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Menu 1 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="department-item wow fadeInUp" data-wow-delay=".25s">
+                        <div class="department-icon">
+                            <img src="assets/img/icon/monitor.svg" alt="Produk Hukum">
+                        </div>
+                        <div class="department-info">
+                            <h4 class="department-title"><a href="{{ route('produk-hukum') }}">Produk Hukum</a></h4>
+                            <p>Beragam dokumen hukum yang telah diterbitkan secara resmi.</p>
+                            <div class="department-btn">
+                                <a href="{{ route('produk-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu 2 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="department-item wow fadeInUp" data-wow-delay=".50s">
+                        <div class="department-icon">
+                            <img src="assets/img/icon/law.svg" alt="Peraturan Daerah">
+                        </div>
+                        <div class="department-info">
+                            <h4 class="department-title"><a href="{{ route('produk-hukum') }}">Peraturan Daerah</a></h4>
+                            <p>Kumpulan Perda yang berlaku dan menjadi acuan hukum di daerah.</p>
+                            <div class="department-btn">
+                                <a href="{{ route('produk-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu 3 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="department-item wow fadeInUp" data-wow-delay=".75s">
+                        <div class="department-icon">
+                            <img src="assets/img/icon/data.svg" alt="Peraturan Bupati">
+                        </div>
+                        <div class="department-info">
+                            <h4 class="department-title"><a href="{{ route('produk-hukum') }}">Peraturan Bupati</a></h4>
+                            <p>Informasi mengenai kebijakan yang ditetapkan oleh Bupati setempat.</p>
+                            <div class="department-btn">
+                                <a href="{{ route('produk-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu 4 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="department-item wow fadeInUp" data-wow-delay="1s">
+                        <div class="department-icon">
+                            <img src="assets/img/icon/health.svg" alt="Statistik">
+                        </div>
+                        <div class="department-info">
+                            <h4 class="department-title"><a href="{{ route('statistik') }}">Statistik</a></h4>
+                            <p>Data dan statistik yang mendukung kebijakan publik berbasis fakta.</p>
+                            <div class="department-btn">
+                                <a href="{{ route('statistik') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu 5 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="department-item wow fadeInUp" data-wow-delay=".25s">
+                        <div class="department-icon">
+                            <img src="assets/img/icon/art.svg" alt="Dasar Hukum">
+                        </div>
+                        <div class="department-info">
+                            <h4 class="department-title"><a href="{{ route('page', 'dasar-hukum') }}">Dasar Hukum</a></h4>
+                            <p>Referensi hukum utama yang menjadi landasan kebijakan dan regulasi.</p>
+                            <div class="department-btn">
+                                <a href="{{ route('page', 'dasar-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu 6 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="department-item wow fadeInUp" data-wow-delay=".50s">
+                        <div class="department-icon">
+                            <img src="assets/img/icon/information.svg" alt="FAQ">
+                        </div>
+                        <div class="department-info">
+                            <h4 class="department-title"><a href="{{ route('faq') }}">FAQ</a></h4>
+                            <p>Pertanyaan umum yang sering ditanyakan terkait layanan dan sistem.</p>
+                            <div class="department-btn">
+                                <a href="{{ route('faq') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- feature area end -->
+
+
+    <!-- counter area -->
+    <div class="counter-area pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="counter-box">
+                        <div class="icon">
+                            <img src="assets/img/icon/course.svg" alt="">
+                        </div>
+                        <div>
+                            <span class="counter" data-count="+" data-to="{{ $countProdukHukumPerda }}" data-speed="3000">{{ $countProdukHukumPerda }}</span>
+                            <h6 class="title">Peraturan Daerah</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <div class="counter-box">
+                        <div class="icon">
+                            <img src="assets/img/icon/graduation.svg" alt="">
+                        </div>
+                        <div>
+                            <span class="counter" data-count="+" data-to="{{ $countProdukHukumBupati }}" data-speed="3000">{{ $countProdukHukumBupati }}</span>
+                            <h6 class="title">Peraturan Bupati</h6>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="row">
-        <!-- Menu 1 -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="department-item wow fadeInUp" data-wow-delay=".25s">
-                <div class="department-icon">
-                    <img src="assets/img/icon/monitor.svg" alt="Produk Hukum">
-                </div>
-                <div class="department-info">
-                    <h4 class="department-title"><a href="{{ route('produk-hukum') }}">Produk Hukum</a></h4>
-                    <p>Beragam dokumen hukum yang telah diterbitkan secara resmi.</p>
-                    <div class="department-btn">
-                        <a href="{{ route('produk-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
+    <!-- counter area end -->
+
+
+
+    <!-- course-area -->
+    <div class="course-area py-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="site-heading text-center">
+                        <!-- <span class="site-title-tagline"><i class="far fa-book-open-reader"></i> Publikasi</span> -->
+                        <h2 class="site-title">Produk Hukum <span>Terbaru</span></h2>
+                        <p>Akses cepat ke Perda dan Perbup terbaru yang diterbitkan Pemerintah Kabupaten Bengkalis, disajikan secara lengkap dan mudah diakses untuk mendukung transparansi publik.</p>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                @foreach ($produkHukum as $produk)
+                <div class="col-lg-12">
+                    <div class="event-item">
+                        <div class="event-location">
+                            <span class="course-level">{{ $produk->no_peraturan }}</span>
+                            <span class="course-level2">{{ $produk->category->name }}</span>
+                        </div>
+                        <div class="event-info">
 
-        <!-- Menu 2 -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="department-item wow fadeInUp" data-wow-delay=".50s">
-                <div class="department-icon">
-                    <img src="assets/img/icon/law.svg" alt="Peraturan Daerah">
-                </div>
-                <div class="department-info">
-                    <h4 class="department-title"><a href="{{ route('produk-hukum') }}">Peraturan Daerah</a></h4>
-                    <p>Kumpulan Perda yang berlaku dan menjadi acuan hukum di daerah.</p>
-                    <div class="department-btn">
-                        <a href="{{ route('produk-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu 3 -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="department-item wow fadeInUp" data-wow-delay=".75s">
-                <div class="department-icon">
-                    <img src="assets/img/icon/data.svg" alt="Peraturan Bupati">
-                </div>
-                <div class="department-info">
-                    <h4 class="department-title"><a href="{{ route('produk-hukum') }}">Peraturan Bupati</a></h4>
-                    <p>Informasi mengenai kebijakan yang ditetapkan oleh Bupati setempat.</p>
-                    <div class="department-btn">
-                        <a href="{{ route('produk-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu 4 -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="department-item wow fadeInUp" data-wow-delay="1s">
-                <div class="department-icon">
-                    <img src="assets/img/icon/health.svg" alt="Statistik">
-                </div>
-                <div class="department-info">
-                    <h4 class="department-title"><a href="{{ route('statistik') }}">Statistik</a></h4>
-                    <p>Data dan statistik yang mendukung kebijakan publik berbasis fakta.</p>
-                    <div class="department-btn">
-                        <a href="{{ route('statistik') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu 5 -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="department-item wow fadeInUp" data-wow-delay=".25s">
-                <div class="department-icon">
-                    <img src="assets/img/icon/art.svg" alt="Dasar Hukum">
-                </div>
-                <div class="department-info">
-                    <h4 class="department-title"><a href="{{ route('page', 'dasar-hukum') }}">Dasar Hukum</a></h4>
-                    <p>Referensi hukum utama yang menjadi landasan kebijakan dan regulasi.</p>
-                    <div class="department-btn">
-                        <a href="{{ route('page', 'dasar-hukum') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu 6 -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="department-item wow fadeInUp" data-wow-delay=".50s">
-                <div class="department-icon">
-                    <img src="assets/img/icon/information.svg" alt="FAQ">
-                </div>
-                <div class="department-info">
-                    <h4 class="department-title"><a href="{{ route('faq') }}">FAQ</a></h4>
-                    <p>Pertanyaan umum yang sering ditanyakan terkait layanan dan sistem.</p>
-                    <div class="department-btn">
-                        <a href="{{ route('faq') }}">Selengkapnya <i class="fas fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-        </div>
-        <!-- feature area end -->
-
-
-        <!-- counter area -->
-        <div class="counter-area pt-60 pb-60">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="counter-box">
-                            <div class="icon">
-                                <img src="assets/img/icon/course.svg" alt="">
+                            <h4 class="event-title"><a href="#">{{ $produk->judul }}</a></h4>
+                            <div class="event-meta">
+                                <span class="event-date"><i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($produk->created_at)->translatedFormat('l, d F Y') }}</span>
+                                <span class="event-time"><i class="far fa-eye"></i>Dibaca : {{ $produk->dibaca }} Kali</span>
                             </div>
-                            <div>
-                                <span class="counter" data-count="+" data-to="{{ $countProdukHukumPerda }}" data-speed="3000">{{ $countProdukHukumPerda }}</span>
-                                <h6 class="title">Peraturan Daerah</h6>
+                            <div class="event-btn">
+                                <a href="{{ route('produk-hukum.detail', $produk->judul) }}" class="theme-btn-read-download">Baca<i class="fas fa-eye"></i></a>
+                                <a href="{{Storage::url($produk->file_produk_hukum)}}" target="_blank" class="theme-btn-read-download">Download<i class="fas fa-arrow-right-long"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="counter-box">
-                            <div class="icon">
-                                <img src="assets/img/icon/graduation.svg" alt="">
-                            </div>
-                            <div>
-                                <span class="counter" data-count="+" data-to="{{ $countProdukHukumBupati }}" data-speed="3000">{{ $countProdukHukumBupati }}</span>
-                                <h6 class="title">Peraturan Bupati</h6>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </div>
-        <!-- counter area end -->
-
-
-
-        <!-- course-area -->
-        <div class="course-area py-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="site-heading text-center">
-                            <!-- <span class="site-title-tagline"><i class="far fa-book-open-reader"></i> Publikasi</span> -->
-                            <h2 class="site-title">Produk Hukum <span>Terbaru</span></h2>
-                            <p>Akses cepat ke Perda dan Perbup terbaru yang diterbitkan Pemerintah Kabupaten Bengkalis, disajikan secara lengkap dan mudah diakses untuk mendukung transparansi publik.</p>
-                        </div>
-                    </div>
-                </div>
-                 <div class="row">
-                    @foreach ($produkHukum as $produk)
-                    <div class="col-lg-12">
-                        <div class="event-item">
-                            <div class="event-location">
-                                <span class="course-level">{{ $produk->no_peraturan }}</span>
-                                <span class="course-level2">{{ $produk->category->name }}</span>
-                            </div>
-                            <div class="event-info">
-                                <div class="event-meta">
-                                    <span class="event-date"><i class="far fa-calendar-alt"></i>{{ $produk->tanggal_terbit }}</span>
-                                    <span class="event-time"><i class="far fa-clock"></i>{{ $produk->waktu_terbit }}</span>
-                                </div>
-                                <h4 class="event-title"><a href="#">{{ $produk->judul }}</a></h4>
-                                <div class="event-btn">
-                                    <a href="{{ route('produk-hukum.detail', $produk->judul) }}" class="theme-btn-read-download">Baca<i class="fas fa-eye"></i></a>
-                                    <a href="{{Storage::url($produk->file_produk_hukum)}}" target="_blank" class="theme-btn-read-download">Download<i class="fas fa-arrow-right-long"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                @endforeach
 
                 <center><a class="theme-btn" style="background-color: orange;" href="{{ route('produk-hukum') }}">Produk Hukum Lainnya<i class="fas fa-arrow-right-long"></i></a></center>
 
-                </div>
             </div>
         </div>
-        <!-- course-area -->
+    </div>
+    <!-- course-area -->
 
-          <!-- team-area -->
-        <div class="team-area py-100">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="site-heading text-center">
-                            <h2 class="site-title">Struktur <span>Organisasi</span></h2>
-                            <p>Berikut adalah struktur organisasi JDIH Kabupaten Bengkalis yang terdiri dari Aparatur Sipil Negara (ASN) yang berdedikasi dalam memberikan pelayanan informasi hukum. Setiap pegawai memiliki peran dan tanggung jawab masing-masing dalam mendukung transparansi dan akuntabilitas penyelenggaraan pemerintahan.</p>
-                        </div>
+    <!-- team-area -->
+    <div class="team-area py-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="site-heading text-center">
+                        <h2 class="site-title">Struktur <span>Organisasi</span></h2>
+                        <p>Berikut adalah struktur organisasi JDIH Kabupaten Bengkalis yang terdiri dari Aparatur Sipil Negara (ASN) yang berdedikasi dalam memberikan pelayanan informasi hukum. Setiap pegawai memiliki peran dan tanggung jawab masing-masing dalam mendukung transparansi dan akuntabilitas penyelenggaraan pemerintahan.</p>
                     </div>
                 </div>
-                <div class="row">
-                    @foreach ($employees as $employee)
-                    <div class="col-md-6 col-lg-3">
-                        <div class="team-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="team-img">
-                                <img src="{{ asset('storage/' . $employee->image_path) }}" alt="{{ $employee->nama_pegawai }}">
-                            </div>
-                            <!-- <div class="team-social">
+            </div>
+            <div class="row">
+                @foreach ($employees as $employee)
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-item wow fadeInUp" data-wow-delay=".25s">
+                        <div class="team-img">
+                            <img src="{{ asset('storage/' . $employee->image_path) }}" alt="{{ $employee->nama_pegawai }}">
+                        </div>
+                        <!-- <div class="team-social">
                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#"><i class="fab fa-whatsapp"></i></a>
                                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="#"><i class="fab fa-youtube"></i></a>
                             </div> -->
-                            <div class="team-content">
-                                <div class="team-bio">
-                                    <h5><a href="#">{{ $employee->nama_pegawai }}</a></h5>
-                                    <span>{{ $employee->jabatan }}</span>
-                                </div>
+                        <div class="team-content">
+                            <div class="team-bio">
+                                <h5><a href="#">{{ $employee->nama_pegawai }}</a></h5>
+                                <span>{{ $employee->jabatan }}</span>
                             </div>
-                            <!-- <span class="team-social-btn"><i class="far fa-share-nodes"></i></span> -->
+                        </div>
+                        <!-- <span class="team-social-btn"><i class="far fa-share-nodes"></i></span> -->
+                    </div>
+                </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!-- team-area end -->
+
+
+    <!-- video-area -->
+    <div class="video-area">
+        <div class="container">
+            <div class="video-content" style="background-image: url(assets/img/video/01.jpg);">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="video-wrapper">
+                            <a class="play-btn popup-youtube" href="https://www.youtube.com/watch?v=kwyKNhkHYgE">
+                                <i class="fas fa-play"></i>
+                            </a>
                         </div>
                     </div>
-                    @endforeach
-
-
                 </div>
             </div>
         </div>
-        <!-- team-area end -->
+    </div>
+    <!-- video-area end -->
 
 
-        <!-- video-area -->
-        <div class="video-area">
-            <div class="container">
-                <div class="video-content" style="background-image: url(assets/img/video/01.jpg);">
-                    <div class="row align-items-center">
-                        <div class="col-lg-12">
-                            <div class="video-wrapper">
-                                <a class="play-btn popup-youtube" href="https://www.youtube.com/watch?v=kwyKNhkHYgE">
-                                    <i class="fas fa-play"></i>
+    <!-- gallery area -->
+    <div class="gallery-area py-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="site-heading text-center">
+
+                        <h2 class="site-title">Galeri <span>Kegiatan</span></h2>
+                        <p>Lihat dokumentasi kegiatan dan acara penting di lingkungan Pemerintah Kabupaten Bengkalis.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                @foreach ($galleryItems->items() as $item)
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-img">
+                            <img src="{{ $item['image_url'] }}" alt="{{ $item['title'] }}">
+                            <div class="gallery-overlay">
+                                <a href="{{ $item['link'] }}" class="gallery-icon">
+                                    <i class="fas fa-link"></i>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- video-area end -->
-
-
-         <!-- gallery area -->
-         <div class="gallery-area py-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="site-heading text-center">
-
-                            <h2 class="site-title">Galeri <span>Kegiatan</span></h2>
-                            <p>Lihat dokumentasi kegiatan dan acara penting di lingkungan Pemerintah Kabupaten Bengkalis.</p>
+                        <div class="gallery-content">
+                            <h4 class="gallery-title">
+                                <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
+                            </h4>
+                            <span class="gallery-date">{{ $item['date'] }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="row g-4">
-                    @foreach ($galleryItems->items() as $item)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="gallery-img">
-                                <img src="{{ $item['image_url'] }}" alt="{{ $item['title'] }}">
-                                <div class="gallery-overlay">
-                                    <a href="{{ $item['link'] }}" class="gallery-icon">
-                                        <i class="fas fa-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="gallery-content">
-                                <h4 class="gallery-title">
-                                    <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
-                                </h4>
-                                <span class="gallery-date">{{ $item['date'] }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-
-                <center><a class="theme-btn" style="background-color: orange;" href="{{ route('galeri') }}">Galeri Lainnya<i class="fas fa-arrow-right-long"></i></a></center>
-
+                @endforeach
             </div>
+
+            <center><a class="theme-btn" style="background-color: orange;" href="{{ route('galeri') }}">Galeri Lainnya<i class="fas fa-arrow-right-long"></i></a></center>
+
         </div>
-        <!-- gallery area end -->
+    </div>
+    <!-- gallery area end -->
 
 
-        <!-- enroll area-->
-        <!-- <div class="enroll-area pt-80 pb-80">
+    <!-- enroll area-->
+    <!-- <div class="enroll-area pt-80 pb-80">
             <div class="container">
                 <div class="col-lg-12">
                     <div class="row g-5 align-items-center">
@@ -581,11 +582,11 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                 </div>
             </div>
         </div> -->
-        <!-- enroll area end -->
+    <!-- enroll area end -->
 
 
-        <!-- department area -->
-        <!-- <div class="department-area bg py-120">
+    <!-- department area -->
+    <!-- <div class="department-area bg py-120">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
@@ -661,84 +662,83 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                 </div>
             </div>
         </div> -->
-        <!-- department area end -->
+    <!-- department area end -->
 
 
-        <!-- faq area -->
-        <div class="faq-area py-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="faq-right">
-                            <div class="site-heading mb-3">
-                                <!-- <span class="site-title-tagline justify-content-start"><i class="far fa-book-open-reader"></i> FAQ</span> -->
-                                <h2 class="site-title my-3">Pertanyaan yang <span>Sering Diajukan</span></h2>
-                            </div>
-                            <p class="mb-3">Jaringan Dokumentasi dan Informasi Hukum (JDIH) adalah sistem informasi hukum yang menyediakan akses terhadap berbagai produk hukum daerah. Berikut adalah beberapa pertanyaan yang sering diajukan terkait layanan JDIH Kabupaten Bengkalis.</p>
-                            <p class="mb-4">
-                                JDIH Kabupaten Bengkalis berkomitmen untuk memberikan layanan informasi hukum yang akurat, lengkap, dan mudah diakses oleh masyarakat. Kami terus berupaya meningkatkan kualitas layanan untuk mendukung transparansi dan kepastian hukum di Kabupaten Bengkalis.
-                            </p>
-                            <!-- <a href="contact.html" class="theme-btn mt-2">Ada Pertanyaan Lain?</a> -->
+    <!-- faq area -->
+    <div class="faq-area py-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="faq-right">
+                        <div class="site-heading mb-3">
+                            <!-- <span class="site-title-tagline justify-content-start"><i class="far fa-book-open-reader"></i> FAQ</span> -->
+                            <h2 class="site-title my-3">Pertanyaan yang <span>Sering Diajukan</span></h2>
                         </div>
+                        <p class="mb-3">Jaringan Dokumentasi dan Informasi Hukum (JDIH) adalah sistem informasi hukum yang menyediakan akses terhadap berbagai produk hukum daerah. Berikut adalah beberapa pertanyaan yang sering diajukan terkait layanan JDIH Kabupaten Bengkalis.</p>
+                        <p class="mb-4">
+                            JDIH Kabupaten Bengkalis berkomitmen untuk memberikan layanan informasi hukum yang akurat, lengkap, dan mudah diakses oleh masyarakat. Kami terus berupaya meningkatkan kualitas layanan untuk mendukung transparansi dan kepastian hukum di Kabupaten Bengkalis.
+                        </p>
+                        <!-- <a href="contact.html" class="theme-btn mt-2">Ada Pertanyaan Lain?</a> -->
                     </div>
-                    <div class="col-lg-6">
-                        <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <span><i class="far fa-question"></i></span> Apa itu JDIH?
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        JDIH (Jaringan Dokumentasi dan Informasi Hukum) adalah sistem informasi hukum yang menyediakan akses terhadap berbagai produk hukum daerah. JDIH Kabupaten Bengkalis merupakan bagian dari sistem nasional JDIH yang bertujuan untuk menyediakan informasi hukum yang lengkap dan akurat.
-                                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span><i class="far fa-question"></i></span> Apa itu JDIH?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show"
+                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    JDIH (Jaringan Dokumentasi dan Informasi Hukum) adalah sistem informasi hukum yang menyediakan akses terhadap berbagai produk hukum daerah. JDIH Kabupaten Bengkalis merupakan bagian dari sistem nasional JDIH yang bertujuan untuk menyediakan informasi hukum yang lengkap dan akurat.
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <span><i class="far fa-question"></i></span> Produk hukum apa saja yang tersedia di JDIH?
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        JDIH Kabupaten Bengkalis menyediakan berbagai produk hukum seperti Peraturan Daerah (Perda), Peraturan Bupati (Perbup), dan produk hukum daerah lainnya yang telah diterbitkan oleh Pemerintah Kabupaten Bengkalis.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span><i class="far fa-question"></i></span> Produk hukum apa saja yang tersedia di JDIH?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    JDIH Kabupaten Bengkalis menyediakan berbagai produk hukum seperti Peraturan Daerah (Perda), Peraturan Bupati (Perbup), dan produk hukum daerah lainnya yang telah diterbitkan oleh Pemerintah Kabupaten Bengkalis.
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                        <span><i class="far fa-question"></i></span> Bagaimana cara mengakses produk hukum di JDIH?
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse"
-                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        Anda dapat mengakses produk hukum melalui website JDIH Kabupaten Bengkalis. Produk hukum dapat diunduh dalam format PDF dan dapat diakses secara gratis oleh masyarakat.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    <span><i class="far fa-question"></i></span> Bagaimana cara mengakses produk hukum di JDIH?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse"
+                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Anda dapat mengakses produk hukum melalui website JDIH Kabupaten Bengkalis. Produk hukum dapat diunduh dalam format PDF dan dapat diakses secara gratis oleh masyarakat.
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingFour">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFour" aria-expanded="false"
-                                        aria-controls="collapseFour">
-                                        <span><i class="far fa-question"></i></span> Apakah ada biaya untuk mengakses JDIH?
-                                    </button>
-                                </h2>
-                                <div id="collapseFour" class="accordion-collapse collapse"
-                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        Tidak ada biaya untuk mengakses dan mengunduh produk hukum melalui JDIH Kabupaten Bengkalis. Layanan ini disediakan secara gratis untuk mendukung transparansi dan akses informasi hukum bagi masyarakat.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="false"
+                                    aria-controls="collapseFour">
+                                    <span><i class="far fa-question"></i></span> Apakah ada biaya untuk mengakses JDIH?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse"
+                                aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Tidak ada biaya untuk mengakses dan mengunduh produk hukum melalui JDIH Kabupaten Bengkalis. Layanan ini disediakan secara gratis untuk mendukung transparansi dan akses informasi hukum bagi masyarakat.
                                 </div>
                             </div>
                         </div>
@@ -746,11 +746,12 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                 </div>
             </div>
         </div>
-        <!-- faq area end -->
+    </div>
+    <!-- faq area end -->
 
 
-        <!-- testimonial area -->
-        <!-- <div class="testimonial-area bg pt-80 pb-80">
+    <!-- testimonial area -->
+    <!-- <div class="testimonial-area bg pt-80 pb-80">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
@@ -886,59 +887,59 @@ Kami menyediakan akses terbuka terhadap berbagai regulasi dan kebijakan daerah, 
                 </div>
             </div>
         </div> -->
-        <!-- testimonial area end -->
+    <!-- testimonial area end -->
 
 
-        <!-- blog area -->
-        <div class="blog-area py-115">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="site-heading text-center">
-                            <h2 class="site-title">Berita<span> Terbaru</span></h2>
-                            <p>Informasi terkini seputar kegiatan, pengumuman, dan perkembangan terbaru dari JDIH Kabupaten Bengkalis untuk meningkatkan transparansi dan akses informasi hukum bagi masyarakat.</p>
+    <!-- blog area -->
+    <div class="blog-area py-115">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="site-heading text-center">
+                        <h2 class="site-title">Berita<span> Terbaru</span></h2>
+                        <p>Informasi terkini seputar kegiatan, pengumuman, dan perkembangan terbaru dari JDIH Kabupaten Bengkalis untuk meningkatkan transparansi dan akses informasi hukum bagi masyarakat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($newsItems as $news)
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
+                        <div class="blog-date"><i class="fal fa-calendar-alt"></i> {{ $news['date'] }}</div>
+                        <div class="blog-item-img">
+                            <img src="{{ $news['image_url'] }}" alt="Thumb">
+                        </div>
+                        <div class="blog-item-info">
+                            <div class="blog-item-meta">
+
+                            </div>
+                            <h4 class="blog-title">
+                                <a href="{{ $news['link'] }}" target="_blank">{{ $news['title'] }}</a>
+                            </h4>
+                            <a class="theme-btn" href="{{ $news['link'] }}" target="_blank">Selengkapnya<i class="fas fa-arrow-right-long"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    @foreach ($newsItems as $news)
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="blog-date"><i class="fal fa-calendar-alt"></i> {{ $news['date'] }}</div>
-                            <div class="blog-item-img">
-                                <img src="{{ $news['image_url'] }}" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <div class="blog-item-meta">
+                @endforeach
+            </div>
+            <center><a class="theme-btn" style="background-color: orange;" href="{{ route('berita') }}">Berita Lainnya<i class="fas fa-arrow-right-long"></i></a></center>
+        </div>
+    </div>
+    <!-- blog area end -->
 
-                                </div>
-                                <h4 class="blog-title">
-                                    <a href="{{ $news['link'] }}" target="_blank">{{ $news['title'] }}</a>
-                                </h4>
-                                <a class="theme-btn" href="{{ $news['link'] }}" target="_blank">Selengkapnya<i class="fas fa-arrow-right-long"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <center><a class="theme-btn" style="background-color: orange;" href="{{ route('berita') }}">Berita Lainnya<i class="fas fa-arrow-right-long"></i></a></center>
+
+    <!-- partner area -->
+    <div class="partner-area bg pt-50 pb-50">
+        <div class="container">
+            <div class="partner-wrapper partner-slider owl-carousel owl-theme">
+                @foreach ($partners as $partner)
+                <a href="{{ $partner->link }}" target="_blank"><img src="{{{ url('storage/' . $partner->image_path) }}}" alt="thumb"></a>
+                @endforeach
             </div>
         </div>
-        <!-- blog area end -->
+    </div>
+    <!-- partner area end -->
 
-
-        <!-- partner area -->
-        <div class="partner-area bg pt-50 pb-50">
-            <div class="container">
-                <div class="partner-wrapper partner-slider owl-carousel owl-theme">
-                    @foreach ($partners as $partner)
-                    <a href="{{ $partner->link }}" target="_blank"><img src="{{{ url('storage/' . $partner->image_path) }}}" alt="thumb"></a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        <!-- partner area end -->
-
-    </main>
+</main>
 
 @endsection

@@ -11,6 +11,12 @@ class ProdukHukumController extends Controller
     public function detail($id)
     {
         $produkHukum = ProdukHukum::where('judul', $id)->first();
+        if ($produkHukum !== null) {
+            $totalBaca = $produkHukum->dibaca + 1;
+            ProdukHukum::where('judul', $id)->update([
+                'dibaca' => $totalBaca
+            ]);
+        }
         return view('frontend.detailpage.peraturan.index', compact('produkHukum'));
     }
 
