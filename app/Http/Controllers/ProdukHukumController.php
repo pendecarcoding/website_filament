@@ -29,4 +29,45 @@ class ProdukHukumController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function apiProdukHukum(Request $r)
+    {
+        try {
+            $produkHukum = ProdukHukum::all();
+            $response =  $produkHukum->map(function ($item) {
+                return [
+                    'idData' => $item->id,
+                    'tahun_pengundangan' => \Carbon\Carbon::parse($item->tanggal_diundangkan)->format('Y'),
+                    'tanggal_pengundangan' => $item->tanggal_diundangkan,
+                    'jenis' => 'Peraturan Bupati', // if fixed
+                    'noPeraturan' => $item->no_peraturan,
+                    'judul' => $item->judul,
+                    'noPanggil' => '-', // placeholder if not in your table
+                    'singkatanJenis' => 'Perbup', // if fixed
+                    'tempatTerbit' => 'Bengkalis', // fixed or optional
+                    'penerbit' => 'Pemerintah Kabupaten Bengkalis',
+                    'deskripsiFisik' => '-',
+                    'sumber' => '-',
+                    'subjek' => '-',
+                    'isbn' => '-',
+                    'status' => 'Berlaku', // or from status column
+                    'bahasa' => 'Indonesia',
+                    'bidangHukum' => 'Pemerintah',
+                    'teuBadan' => '-',
+                    'nomorIndukBuku' => '-',
+                    'fileDownload' => $item->file_produk_hukum,
+                    'urlDownload' => asset('storage/' . $item->file_produk_hukum),
+                    'abstrak' => '-',
+                    'urlabstrak' => '-',
+                    'urlDetailPeraturan' => url('/web/detailperaturan/' . $item->id),
+                    'operasi' => '4',
+                    'display' => '1',
+                ];
+            });
+
+            return response()->json($response);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }
