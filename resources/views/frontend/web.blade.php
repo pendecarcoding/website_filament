@@ -32,7 +32,7 @@
 
 
     <!-- footer area -->
-     @include('frontend.nav.footer')
+    @include('frontend.nav.footer')
     <!-- footer area end -->
 
 
