@@ -13,12 +13,13 @@
     <link rel="icon" type="image/x-icon" href="{{Storage::url(setting('site_logo', 'default value'))}}">
 
     <!-- css -->
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/all-fontawesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}?v={{ filemtime(public_path('assets/css/bootstrap.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/all-fontawesome.min.css') }}?v={{ filemtime(public_path('assets/css/all-fontawesome.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}?v={{ filemtime(public_path('assets/css/animate.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.min.css') }}?v={{ filemtime(public_path('assets/css/magnific-popup.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}?v={{ filemtime(public_path('assets/css/owl.carousel.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @php
