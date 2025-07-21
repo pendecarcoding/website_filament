@@ -20,7 +20,7 @@
                                     {{ $slider->title }}
                                 </h1>
                                 <p data-animation="fadeInLeft" data-delay=".75s">
-                                    Kabupaten Bengkalis
+                                    Layanan Digital Informasi Hukum Resmi Pemerintah Bengkalis
                                 </p>
                                 <!-- <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
                                         <a href="about.html" class="theme-btn">About More<i
