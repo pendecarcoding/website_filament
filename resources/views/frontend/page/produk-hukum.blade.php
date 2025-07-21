@@ -96,41 +96,54 @@
             <!-- pagination -->
             <div class="pagination-area">
                 <div aria-label="Page navigation example">
+                    @php
+                    $currentPage = $produkHukum->currentPage();
+                    $lastPage = $produkHukum->lastPage();
+                    $start = max($currentPage - 2, 1);
+                    $end = min($currentPage + 2, $lastPage);
+                    @endphp
+
                     <ul class="pagination justify-content-center">
-                        @if($produkHukum->onFirstPage())
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true"><i class="far fa-arrow-left"></i></span>
-                            </a>
-                        </li>
-                        @else
+
+                        {{-- Tombol First & Prev --}}
+                        @if ($currentPage > 1)
                         <li class="page-item">
-                            <a class="page-link" href="{{ $produkHukum->previousPageUrl() }}" aria-label="Previous">
-                                <span aria-hidden="true"><i class="far fa-arrow-left"></i></span>
-                            </a>
+                            <a class="page-link" href="{{ $produkHukum->url(1) }}">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $produkHukum->previousPageUrl() }}">«</a>
                         </li>
                         @endif
 
-                        @for($i = 1; $i <= $produkHukum->lastPage(); $i++)
-                            <li class="page-item {{ $produkHukum->currentPage() == $i ? 'active' : '' }}">
-                                <a class="page-link" href="{{ $produkHukum->url($i) }}">{{ $i }}</a>
+                        {{-- Titik di awal jika perlu --}}
+                        @if ($start > 1)
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                        @endif
+
+                        {{-- Loop halaman --}}
+                        @for ($i = $start; $i <= $end; $i++)
+                            <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $produkHukum->url($i) }}">{{ $i }}</a>
                             </li>
                             @endfor
 
-                            @if($produkHukum->hasMorePages())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $produkHukum->nextPageUrl() }}" aria-label="Next">
-                                    <span aria-hidden="true"><i class="far fa-arrow-right"></i></span>
-                                </a>
-                            </li>
-                            @else
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true"><i class="far fa-arrow-right"></i></span>
-                                </a>
-                            </li>
-                            @endif
+                            {{-- Titik di akhir jika perlu --}}
+                            @if ($end < $lastPage)
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                                @endif
+
+                                {{-- Tombol Next & Last --}}
+                                @if ($currentPage < $lastPage)
+                                    <li class="page-item">
+                                    <a class="page-link" href="{{ $produkHukum->nextPageUrl() }}">»</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $produkHukum->url($lastPage) }}">Last</a>
+                                    </li>
+                                    @endif
+
                     </ul>
+
                 </div>
             </div>
             <!-- pagination end -->

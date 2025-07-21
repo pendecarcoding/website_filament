@@ -4755,18 +4755,17 @@ label {
 }
 
 .pagination .page-link {
-  border: none;
-  background:  var(--theme-color2);
-  color: var(--color-white);
-  margin: 0 10px;
-  border-radius: 12px !important;
-  width: 40px;
-  height: 40px;
-  line-height: 28px;
-  text-align: center;
-  transition: var(--transition);
+    border: none;
+    background: var(--theme-color2);
+    color: var(--color-white);
+    margin: 0 10px;
+    border-radius: 12px !important;
+    width: 55px;
+    height: 40px;
+    line-height: 28px;
+    text-align: center;
+    transition: var(--transition);
 }
-
 .pagination .page-link:hover,
 .pagination .page-item.active .page-link {
   background: var(--theme-color);
