@@ -23,6 +23,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use TomatoPHP\FilamentApi\FilamentAPIPlugin;
 use TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin;
 use TomatoPHP\FilamentSettingsHub\Pages\SiteSettings;
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
+use Filament\Navigation\NavigationItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -51,7 +53,6 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
-
             ->font('Poppins')
             ->middleware([
                 EncryptCookies::class,
@@ -67,15 +68,14 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
- ->plugins([
-            CuratorPlugin::make(),
-            FilamentMenuBuilderPlugin::make(),
-             FilamentSettingsHubPlugin::make()
-        ->allowSiteSettings()
-        ->allowSocialMenuSettings(),
-        // FilamentAPIPlugin::make()
-        ])
-        ;
-
+            ->plugins([
+                CuratorPlugin::make(),
+                FilamentMenuBuilderPlugin::make(),
+                FilamentSpatieRolesPermissionsPlugin::make(),
+                FilamentSettingsHubPlugin::make()
+                    ->allowSiteSettings()
+                    ->allowSocialMenuSettings(),
+                // FilamentAPIPlugin::make()
+            ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Filament\Facades\Filament::serving(function () {
+            $user = auth()->user();
+            if ($user) {
+                Log::info('Filament serving user:', [
+                    'id' => $user->id,
+                    'roles' => $user->getRoleNames(),
+                    'is_superadmin' => $user->is_superadmin ?? false,
+                    'permissions' => $user->getAllPermissions()->pluck('name'),
+                ]);
+            }
+        });
     }
 }
