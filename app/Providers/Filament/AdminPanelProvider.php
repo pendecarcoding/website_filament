@@ -32,8 +32,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('4dmin-web')
+            ->path('4dmin-web')
             ->login()
             ->colors([
                 'primary' => Color::Blue,
