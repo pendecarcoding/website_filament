@@ -1,13 +1,27 @@
 <head>
-    <!-- meta tags -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
 
-    <!-- title -->
-    <title>{{setting("site_name")}}</title>
+    <!-- Dynamic & Safe Meta Tags -->
+    <meta name="description" content="{{ strip_tags(trim(View::yieldContent('meta_description', 'JDIH Kabupaten Bengkalis adalah portal resmi yang menyediakan dokumentasi hukum.'))) }}">
+    <meta name="keywords" content="{{ strip_tags(trim(View::yieldContent('meta_keywords', 'JDIH Bengkalis, Hukum Bengkalis, Produk Hukum Daerah, Peraturan Daerah'))) }}">
+    <meta name="author" content="{{ strip_tags(trim(View::yieldContent('meta_author', 'JDIH Kabupaten Bengkalis'))) }}">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="{{ strip_tags(trim(View::yieldContent('og_title', setting('site_name') ?? 'JDIH Kabupaten Bengkalis'))) }}">
+    <meta property="og:description" content="{{ strip_tags(trim(View::yieldContent('og_description', 'Portal resmi Jaringan Dokumentasi dan Informasi Hukum Kabupaten Bengkalis.'))) }}">
+    <meta property="og:image" content="{{ asset(setting('site_logo') ?? 'images/default-og.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ strip_tags(trim(View::yieldContent('twitter_title', setting('site_name') ?? 'JDIH Kabupaten Bengkalis'))) }}">
+    <meta name="twitter:description" content="{{ strip_tags(trim(View::yieldContent('twitter_description', 'Portal resmi Jaringan Dokumentasi dan Informasi Hukum Kabupaten Bengkalis.'))) }}">
+    <meta name="twitter:image" content="{{ asset(setting('site_logo') ?? 'images/default-og.png') }}">
+
+    <!-- Page Title -->
+    <title>{{ strip_tags(trim(View::yieldContent('title', setting('site_name') ?? 'JDIH Kabupaten Bengkalis'))) }}</title>
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="{{Storage::url(setting('site_logo', 'default value'))}}">
