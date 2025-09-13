@@ -70,4 +70,10 @@ class ProdukHukumController extends Controller
             //throw $th;
         }
     }
+
+    public function productHukumJdih(Request $request)
+    {
+        $produkHukum = ProdukHukum::all();
+        return response()->json($produkHukum);
+    }
 }

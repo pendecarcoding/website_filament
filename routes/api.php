@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/jdihn-sync', [ProdukHukumController::class, 'apiProdukHukum']);
+
+Route::get('produkhukum-jdih', [ProdukHukumController::class, 'productHukumJdih']);
