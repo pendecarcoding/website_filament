@@ -73,7 +73,12 @@ class ProdukHukumController extends Controller
 
     public function productHukumJdih(Request $request)
     {
-        $produkHukum = ProdukHukum::all();
+        if ($request->jenis = 'perbub') {
+            $produkHukum = ProdukHukum::where('category_id', '3')->get();
+        } elseif ($request->jenis == 'perda') {
+            $produkHukum = ProdukHukum::where('category_id', '5')->get();
+        }
+
         return response()->json($produkHukum);
     }
 }
