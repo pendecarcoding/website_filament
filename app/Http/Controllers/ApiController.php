@@ -134,4 +134,33 @@ class ApiController extends Controller
             ], 500);
         }
     }
+
+    public function statistic(Request $r)
+    {
+        // Range tahun
+        $years = range(2016, 2025);
+
+        // Ambil data jumlah dokumen per tahun
+        // Misal tabel: produk_hukum (id, kategori, tahun, ...)
+        $perbub = [];
+        $perda = [];
+
+        foreach ($years as $year) {
+            $perbub[] = ProdukHukum::where('category_id', '3')
+                ->whereYear('tanggal_penetapan', $year)
+                ->count();
+
+            $perda[] = ProdukHukum::where('category_id', '5')
+                ->whereYear('tanggal_penetapan', $year)
+                ->count();
+        }
+
+        return response()->json([
+            'years' => $years,
+            'data' => [
+                'perbub' => $perbub,
+                'perda'  => $perda,
+            ],
+        ]);
+    }
 }
