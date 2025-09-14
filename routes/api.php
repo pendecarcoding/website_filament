@@ -24,3 +24,4 @@ Route::get('/jdihn-sync', [ProdukHukumController::class, 'apiProdukHukum']);
 
 Route::get('produkhukum-jdih', [ApiController::class, 'productHukumJdih']);
 Route::get('selayangpandang', [ApiController::class, 'selayangPandang']);
+Route::get('berita', [ApiController::class, 'berita']);
