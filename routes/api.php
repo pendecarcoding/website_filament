@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukHukumController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/jdihn-sync', [ProdukHukumController::class, 'apiProdukHukum']);
 
-Route::get('produkhukum-jdih', [ProdukHukumController::class, 'productHukumJdih']);
+Route::get('produkhukum-jdih', [ApiController::class, 'productHukumJdih']);
+Route::get('selayangpandang', [ApiController::class, 'selayangPandang']);
