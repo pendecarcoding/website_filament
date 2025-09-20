@@ -27,3 +27,5 @@ Route::match(['get', 'post'], '/page/{slug}', [PageController::class, 'index'])-
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
 Route::get('/import-produkhukum/{year}', [ProdukHukumController::class, 'importJson']);
+
+Route::get('Privacy-Policy', [MainPageController::class, 'privacyPolicy']);

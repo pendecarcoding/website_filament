@@ -82,17 +82,17 @@ class MainPageController extends Controller
         $categories = Category::all();
         $produkHukum = ProdukHukum::latest()->paginate(10);
         $employees = Employee::all();
-        $countProdukHukumPerda = ProdukHukum::whereHas('category', function($query) {
+        $countProdukHukumPerda = ProdukHukum::whereHas('category', function ($query) {
             $query->where('name', Self::CATEGORY_PERDA);
         })->count();
-        $countProdukHukumBupati = ProdukHukum::whereHas('category', function($query) {
+        $countProdukHukumBupati = ProdukHukum::whereHas('category', function ($query) {
             $query->where('name', Self::CATEGORY_BUPATI);
         })->count();
 
-       $galleryItems = $this->getGalleryItems(request()->get('page', 1), 6);
+        $galleryItems = $this->getGalleryItems(request()->get('page', 1), 6);
         $newsItems = $this->getNewsItems(request()->get('page', 1), 6);
 
-        return view('frontend.page.main', compact('sliders', 'produkHukum', 'employees', 'galleryItems', 'newsItems','partners','countProdukHukumPerda','countProdukHukumBupati','categories'));
+        return view('frontend.page.main', compact('sliders', 'produkHukum', 'employees', 'galleryItems', 'newsItems', 'partners', 'countProdukHukumPerda', 'countProdukHukumBupati', 'categories'));
     }
 
     public function berita()
@@ -162,7 +162,6 @@ class MainPageController extends Controller
             ]);
 
             return view('frontend.page.produk-hukum', compact('produkHukum', 'categories'));
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Log validation errors
             Log::warning('Search validation failed', [
@@ -173,7 +172,6 @@ class MainPageController extends Controller
             return back()
                 ->withInput($request->except('_token'))
                 ->withErrors($e->errors());
-
         } catch (\Exception $e) {
             // Log other exceptions
             Log::error('Search error', [
@@ -252,7 +250,6 @@ class MainPageController extends Controller
             $this->storeInCache($cacheKey, $paginator, $this->cacheTime);
 
             return $paginator;
-
         } catch (\Exception $e) {
             Log::error('Error scraping news: ' . $e->getMessage());
             return new \Illuminate\Pagination\LengthAwarePaginator([], 0, $perPage);
@@ -374,7 +371,6 @@ class MainPageController extends Controller
             $this->storeInCache($cacheKey, $paginator, $this->cacheTime);
 
             return $paginator;
-
         } catch (\Exception $e) {
             Log::error('Error scraping gallery: ' . $e->getMessage());
             Log::error('Stack trace: ' . $e->getTraceAsString());
@@ -442,7 +438,6 @@ class MainPageController extends Controller
             $this->storeInCache($cacheKey, $paginator, $this->cacheTime);
 
             return $paginator;
-
         } catch (\Exception $e) {
             Log::error('Error scraping videos: ' . $e->getMessage());
             return new \Illuminate\Pagination\LengthAwarePaginator([], 0, $perPage);
@@ -468,5 +463,10 @@ class MainPageController extends Controller
         Cache::forget($pattern);
 
         return response()->json(['message' => 'Video cache cleared successfully']);
+    }
+
+    public function privacyPolicy(Request $r)
+    {
+        return response()->view('privacy-policy');
     }
 }
