@@ -35,15 +35,16 @@ class ProdukHukumController extends Controller
         try {
             $produkHukum = ProdukHukum::all();
             $response =  $produkHukum->map(function ($item) {
+                $singkatanJenis = $item->category->name == 'Peraturan Bupati' ? 'PERBUP' : 'PERDA';
                 return [
                     'idData' => $item->id,
                     'tahun_pengundangan' => \Carbon\Carbon::parse($item->tanggal_diundangkan)->format('Y'),
                     'tanggal_pengundangan' => $item->tanggal_diundangkan,
-                    'jenis' => 'Peraturan Bupati', // if fixed
+                    'jenis' => $item->category->name, // if fixed
                     'noPeraturan' => $item->no_peraturan,
                     'judul' => $item->judul,
                     'noPanggil' => '-', // placeholder if not in your table
-                    'singkatanJenis' => 'Perbup', // if fixed
+                    'singkatanJenis' => $singkatanJenis, // if fixed
                     'tempatTerbit' => 'Bengkalis', // fixed or optional
                     'penerbit' => 'Pemerintah Kabupaten Bengkalis',
                     'deskripsiFisik' => '-',
@@ -55,11 +56,11 @@ class ProdukHukumController extends Controller
                     'bidangHukum' => 'Pemerintah',
                     'teuBadan' => '-',
                     'nomorIndukBuku' => '-',
-                    'fileDownload' => $item->file_produk_hukum,
+                    'fileDownload' => asset('storage/' . $item->file_produk_hukum),
                     'urlDownload' => asset('storage/' . $item->file_produk_hukum),
                     'abstrak' => '-',
                     'urlabstrak' => '-',
-                    'urlDetailPeraturan' => url('/web/detailperaturan/' . $item->id),
+                    'urlDetailPeraturan' => url('/view/produk-hukum/detail/' . $item->judul),
                     'operasi' => '4',
                     'display' => '1',
                 ];
