@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ProdukHukum', function (Blueprint $table) {
+        Schema::table('produkhukum', function (Blueprint $table) {
              $table->longText('abstract')
                 ->after('judul');
 
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('produk_hukums', function (Blueprint $table) {
+        Schema::table('produkhukum', function (Blueprint $table) {
             //
         });
     }
