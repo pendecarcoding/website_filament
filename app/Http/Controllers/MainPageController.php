@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use App\Models\Partner;
 use App\Models\Category;
+use Illuminate\Support\Facades\Http;
 
 class MainPageController extends Controller
 {
     private $client;
     private $baseUrl = 'https://diskominfotik.bengkaliskab.go.id/';
+    private $chartToday = 'https://www.histats.com/viewstats/?sid=4962981&ccid=204';
     private $cacheTime = 240; // Cache for 1 minute
 
     const CATEGORY_PERDA = 'Peraturan Daerah';
@@ -92,8 +94,60 @@ class MainPageController extends Controller
         $galleryItems = $this->getGalleryItems(request()->get('page', 1), 6);
         $newsItems = $this->getNewsItems(request()->get('page', 1), 6);
 
-        return view('frontend.page.main', compact('sliders', 'produkHukum', 'employees', 'galleryItems', 'newsItems', 'partners', 'countProdukHukumPerda', 'countProdukHukumBupati', 'categories'));
+$html = Http::get($this->chartToday)->body();
+
+preg_match_all('/_init_from_JSON\("({.*?})"\)/s', $html, $matches);
+
+$todayVisitors = 0;
+$firstTimeVisitors = 0;
+$pageViewsToday = 0;
+
+$hourlyPageViews = [];
+
+foreach ($matches[1] as $rawJson) {
+    $json = json_decode(stripslashes($rawJson), true);
+
+    // DAILY visitors
+    if (($json['range'] ?? null) === 'd' && $todayVisitors === 0) {
+        $segments = $json['AR_segments']['h'] ?? [];
+        $firstTimeVisitors = $segments[0] ?? 0;
+        $todayVisitors = array_sum($segments);
     }
+
+    // HOURLY page views (INI YANG DIPAKAI CHART)
+    if (($json['range'] ?? null) === 'h' && empty($hourlyPageViews)) {
+        $hourlyPageViews = $json['AR_segments']['h'] ?? [];
+        $pageViewsToday = array_sum($hourlyPageViews);
+    }
+}
+
+// fallback kalau data kurang 24 jam
+if (count($hourlyPageViews) < 24) {
+    $hourlyPageViews = array_pad($hourlyPageViews, 24, 0);
+}
+
+$pageViewsPerVisit = $todayVisitors > 0
+    ? round($pageViewsToday / $todayVisitors, 2)
+    : 0;
+
+
+
+    return view('frontend.page.main', compact(
+        'sliders',
+        'produkHukum',
+        'employees',
+        'galleryItems',
+        'newsItems',
+        'partners',
+        'countProdukHukumPerda',
+        'countProdukHukumBupati',
+        'categories',
+       'todayVisitors',
+        'firstTimeVisitors',
+        'pageViewsToday',
+        'pageViewsPerVisit',
+        'hourlyPageViews'
+    )); }
 
     public function berita()
     {

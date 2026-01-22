@@ -19,7 +19,9 @@ class ProdukHukum extends Model
         'tanggal_diundangkan',
         'no_lembaran_daerah',
         'file_produk_hukum',
-        'dibaca'
+        'dibaca',
+        'abstract',
+        'status',
     ];
 
     public function category()

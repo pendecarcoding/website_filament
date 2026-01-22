@@ -55,6 +55,14 @@
                             <td>{{$produkHukum->no_lembaran_daerah}}</td>
                         </tr>
                         <tr>
+                            <td>Abstract</td>
+                            <td>{!! $produkHukum->abstract !!}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>{!! $produkHukum->status !!}</td>
+                        </tr>
+                        <tr>
                             <td>File Produk Hukum</td>
                             <td>
                                 <small>

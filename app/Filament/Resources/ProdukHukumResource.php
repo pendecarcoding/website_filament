@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\RichEditor;
 
 class ProdukHukumResource extends Resource
 {
@@ -45,19 +46,55 @@ class ProdukHukumResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('no_peraturan')->required(),
-                TextInput::make('judul')->required(),
+                TextInput::make('no_peraturan')
+                    ->required(),
+
+                TextInput::make('judul')
+                    ->required(),
+
                 Select::make('category_id')
                     ->label('Kategori')
                     ->relationship('category', 'name')
                     ->required(),
-                DatePicker::make('tanggal_penetapan')->required(),
-                DatePicker::make('tanggal_diundangkan')->required(),
-                TextInput::make('no_lembaran_daerah')->required(),
+
+                Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        'Berlaku' => 'Berlaku',
+                        'Tidak Berlaku' => 'Tidak Berlaku',
+                        'Dicabut' => 'Dicabut',
+                        'Mencabut' => 'Mencabut',
+                    ])
+                    ->required()
+                    ->default('Berlaku'),
+
+                RichEditor::make('abstract')
+                    ->label('Abstrak')
+                    ->required()
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'bulletList',
+                        'orderedList',
+                        'undo',
+                        'redo',
+                    ])
+                    ->columnSpanFull(),
+
+                DatePicker::make('tanggal_penetapan')
+                    ->required(),
+
+                DatePicker::make('tanggal_diundangkan')
+                    ->required(),
+
+                TextInput::make('no_lembaran_daerah')
+                    ->required(),
+
                 FileUpload::make('file_produk_hukum')
                     ->directory('produk-hukum-files')
                     ->previewable(true)
-                    ->maxSize(20480) // 20 MB
+                    ->maxSize(20480)
                     ->preserveFilenames()
                     ->required(),
             ]);
@@ -66,20 +103,20 @@ class ProdukHukumResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-           ->columns([
-            TextColumn::make('no_peraturan')->searchable(),
-            TextColumn::make('judul')->limit(50)->searchable(),
-            TextColumn::make('file_produk_hukum')
-                        ->label('Preview File')
-                        ->formatStateUsing(fn ($state) => 'Preview')
-                        ->url(fn ($record) => asset('storage/' . $record->file_produk_hukum), true)
-                        ->openUrlInNewTab(),
-            TextColumn::make('category.name')->label('Kategori')->sortable(),
-            TextColumn::make('tanggal_penetapan')->date(),
-            TextColumn::make('tanggal_diundangkan')->date(),
-            TextColumn::make('no_lembaran_daerah'),
-        ])
-        ->defaultSort('tanggal_penetapan', 'desc')
+            ->columns([
+                TextColumn::make('no_peraturan')->searchable(),
+                TextColumn::make('judul')->limit(50)->searchable(),
+                TextColumn::make('file_produk_hukum')
+                    ->label('Preview File')
+                    ->formatStateUsing(fn($state) => 'Preview')
+                    ->url(fn($record) => asset('storage/' . $record->file_produk_hukum), true)
+                    ->openUrlInNewTab(),
+                TextColumn::make('category.name')->label('Kategori')->sortable(),
+                TextColumn::make('tanggal_penetapan')->date(),
+                TextColumn::make('tanggal_diundangkan')->date(),
+                TextColumn::make('no_lembaran_daerah'),
+            ])
+            ->defaultSort('tanggal_penetapan', 'desc')
             ->filters([
                 //
             ])

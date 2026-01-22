@@ -2,6 +2,79 @@
 
 @section('content')
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .histats-summary-bar {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.summary-header {
+    background: linear-gradient(180deg, #5fa0dd, #2c6fb7);
+    color: #fff;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.summary-header .title {
+    font-size: 16px;
+}
+
+.summary-header .date {
+    font-size: 14px;
+}
+
+.summary-items {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid #e5e7eb;
+}
+
+.summary-items .item {
+    padding: 12px 10px;
+    text-align: center;
+    border-right: 1px solid #e5e7eb;
+}
+
+.summary-items .item:last-child {
+    border-right: none;
+}
+
+.summary-items .value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #111827;
+}
+
+.summary-items .value small {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.summary-items .label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.summary-items .highlight {
+    background: #f0f9eb;
+}
+
+@media (max-width: 1024px) {
+    .summary-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+</style>
 
 
 <main class="main">
@@ -317,43 +390,100 @@
     </div>
     <!-- feature area end -->
 
-
-    <!-- counter area -->
-    <div class="counter-area pt-60 pb-60">
+    <!-- course-area -->
+     <div class="feature-area pt-10 pb-100">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-sm-6">
-                    <div class="counter-box">
-                        <div class="icon">
-                            <img src="assets/img/icon/course.svg" alt="">
-                        </div>
-                        <div>
-                            <span class="counter" data-count="+" data-to="{{ $countProdukHukumPerda }}" data-speed="3000">{{ $countProdukHukumPerda }}</span>
-                            <h6 class="title">Peraturan Daerah</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <div class="counter-box">
-                        <div class="icon">
-                            <img src="assets/img/icon/graduation.svg" alt="">
-                        </div>
-                        <div>
-                            <span class="counter" data-count="+" data-to="{{ $countProdukHukumBupati }}" data-speed="3000">{{ $countProdukHukumBupati }}</span>
-                            <h6 class="title">Peraturan Bupati</h6>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="site-heading text-center">
+     <h2 class="site-title">Trafik<span> Pengunjung</span></h2>
             </div>
+
+            <div class="histats-summary-bar">
+    <div class="summary-header">
+        <div class="title">
+            TODAY
+        </div>
+        <div class="date">
+            {{ now()->format('d F Y') }}
         </div>
     </div>
-    <!-- counter area end -->
+
+    <div class="summary-items">
+        <div class="item">
+            <div class="value">{{ $pageViewsToday }}</div>
+            <div class="label">Page views</div>
+        </div>
+
+        <div class="item">
+            <div class="value">{{ $todayVisitors }}</div>
+            <div class="label">Visitors</div>
+        </div>
+
+        <div class="item">
+            <div class="value">
+                {{ $firstTimeVisitors }}
+                <small>
+                    ({{ $todayVisitors > 0 ? round($firstTimeVisitors / $todayVisitors * 100, 2) : 0 }}%)
+                </small>
+            </div>
+            <div class="label">First time visitors</div>
+        </div>
+
+        <div class="item highlight">
+            <div class="value">0</div>
+            <div class="label">Live users online</div>
+        </div>
+
+        <div class="item">
+            <div class="value">50s</div>
+            <div class="label">Average visit length</div>
+        </div>
+
+        <div class="item">
+            <div class="value">{{ $pageViewsPerVisit }}</div>
+            <div class="label">Page views / visit</div>
+        </div>
+    </div>
+</div>
+
+<div style="
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+    margin-top:20px;
+">
+    <canvas id="histatsChart" height="140"></canvas>
+</div>
+<center>
+                                 <!-- Histats.com  (div with counter) -->
+                                 <div id="histats_counter"></div>
+                             </center>
+                             <!-- Histats.com  START  (aync)-->
+                             <script type="text/javascript">
+                                 var _Hasync = _Hasync || [];
+                                 _Hasync.push(['Histats.start', '1,4962981,4,204,260,30,00011000']);
+                                 _Hasync.push(['Histats.fasi', '1']);
+                                 _Hasync.push(['Histats.track_hits', '']);
+                                 (function() {
+                                     var hs = document.createElement('script');
+                                     hs.type = 'text/javascript';
+                                     hs.async = true;
+                                     hs.src = ('//s10.histats.com/js15_as.js');
+                                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+                                 })();
+                             </script>
+                             <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4962981&101" alt="website statistics" border="0"></a></noscript>
+                             <!-- Histats.com  END  -->
+
+        </div>
+     </div>
 
 
 
-    <!-- course-area -->
-    <div class="course-area py-120">
+
+
+
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mx-auto">
@@ -941,5 +1071,97 @@
     <!-- partner area end -->
 
 </main>
+
+<script>
+const ctx = document.getElementById('histatsChart').getContext('2d');
+
+const labels = [...Array(24).keys()];
+
+const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+gradient.addColorStop(0, 'rgba(59,130,246,0.9)');
+gradient.addColorStop(1, 'rgba(59,130,246,0.3)');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Page Views',
+            data: @json($hourlyPageViews),
+            backgroundColor: gradient,
+            borderRadius: 8,
+            barThickness: 22,
+            maxBarThickness: 28,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+            padding: {
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: 0
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Hour',
+                    font: {
+                        size: 13,
+                        weight: 'bold'
+                    }
+                }
+            },
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                },
+                ticks: {
+                    stepSize: 10
+                },
+                title: {
+                    display: true,
+                    text: 'Page Views',
+                    font: {
+                        size: 13,
+                        weight: 'bold'
+                    }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    boxWidth: 14,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: '#1f2937',
+                titleColor: '#fff',
+                bodyColor: '#e5e7eb',
+                padding: 10,
+                cornerRadius: 6,
+                callbacks: {
+                    label: function(context) {
+                        return ` ${context.parsed.y} page views`;
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
 
 @endsection
