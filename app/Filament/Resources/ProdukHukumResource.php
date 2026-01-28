@@ -46,11 +46,9 @@ class ProdukHukumResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('no_peraturan')
-                    ->required(),
+                TextInput::make('no_peraturan'),
 
-                TextInput::make('judul')
-                    ->required(),
+                TextInput::make('judul'),
 
                 Select::make('category_id')
                     ->label('Kategori')
@@ -65,12 +63,10 @@ class ProdukHukumResource extends Resource
                         'Dicabut' => 'Dicabut',
                         'Mencabut' => 'Mencabut',
                     ])
-                    ->required()
                     ->default('Berlaku'),
 
                 RichEditor::make('abstract')
                     ->label('Abstrak')
-                    ->required()
                     ->toolbarButtons([
                         'bold',
                         'italic',
@@ -82,14 +78,11 @@ class ProdukHukumResource extends Resource
                     ])
                     ->columnSpanFull(),
 
-                DatePicker::make('tanggal_penetapan')
-                    ->required(),
+                DatePicker::make('tanggal_penetapan'),
 
-                DatePicker::make('tanggal_diundangkan')
-                    ->required(),
+                DatePicker::make('tanggal_diundangkan'),
 
-                TextInput::make('no_lembaran_daerah')
-                    ->required(),
+                TextInput::make('no_lembaran_daerah'),
 
                 FileUpload::make('file_produk_hukum')
                     ->directory('produk-hukum-files')
