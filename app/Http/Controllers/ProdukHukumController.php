@@ -10,10 +10,11 @@ class ProdukHukumController extends Controller
 {
     public function detail($id)
     {
-        $produkHukum = ProdukHukum::where('judul', $id)->first();
+        $judul = urldecode($id);
+        $produkHukum = ProdukHukum::where('judul', $judul)->first();
         if ($produkHukum !== null) {
             $totalBaca = $produkHukum->dibaca + 1;
-            ProdukHukum::where('judul', $id)->update([
+            ProdukHukum::where('judul', $judul)->update([
                 'dibaca' => $totalBaca
             ]);
         }

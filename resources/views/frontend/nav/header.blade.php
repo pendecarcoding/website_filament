@@ -4,6 +4,9 @@
     <div class="header-top">
         <div class="container">
             <div class="header-top-wrap">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="{{Storage::url(setting('site_logo', 'default value'))}}">
+                </a>
                 <div class="header-top-left">
                     <div class="header-top-social">
                         <span>Ikuti Kami : </span>
@@ -34,9 +37,7 @@
     <div class="main-navigation">
         <nav class="navbar navbar-expand-lg">
             <div class="container position-relative">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{Storage::url(setting('site_logo', 'default value'))}}">
-                </a>
+
                 <div class="mobile-menu-right">
                     <div class="search-btn">
                         <button type="button" class="nav-right-link search-box-outer"><i

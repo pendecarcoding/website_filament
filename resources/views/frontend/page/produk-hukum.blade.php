@@ -84,7 +84,7 @@
                                 <span class="event-time"><i class="far fa-eye"></i>Dibaca : {{ $produk->dibaca }} Kali</span>
                             </div>
                             <div class="event-btn">
-                                <a href="{{ route('produk-hukum.detail', $produk->judul) }}" class="theme-btn-read-download">Baca<i class="fas fa-eye"></i></a>
+                                <a href="{{ route('produk-hukum.detail', urlencode($produk->judul)) }}" class="theme-btn-read-download">Baca<i class="fas fa-eye"></i></a>
                                 <a href="{{Storage::url($produk->file_produk_hukum)}}" target="_blank" class="theme-btn-read-download">Download<i class="fas fa-arrow-right-long"></i></a>
                             </div>
                         </div>
