@@ -38,6 +38,10 @@ class ProdukHukumResource extends Resource
                     'PTUN Pekanbaru',
                     'PT Pekanbaru',
                     'PTUN Medan',
+                    'Naskah Akademik',
+                    'Edaran',
+                    'Ranperda',
+                    'Risalah',
                 ]);
             });
     }
