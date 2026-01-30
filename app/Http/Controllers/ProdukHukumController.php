@@ -8,18 +8,33 @@ use App\Services\ProdukHukumService;
 
 class ProdukHukumController extends Controller
 {
-    public function detail($id)
-    {
-        $judul = urldecode($id);
-        $produkHukum = ProdukHukum::where('judul', $judul)->first();
-        if ($produkHukum !== null) {
-            $totalBaca = $produkHukum->dibaca + 1;
-            ProdukHukum::where('judul', $judul)->update([
-                'dibaca' => $totalBaca
-            ]);
+    public function detail($id, Request $request)
+{
+    $judul = urldecode($id);
+    $categoryId = null;
+
+    // Ambil & decode category_id (base64)
+    if ($request->filled('cat')) {
+        $decoded = base64_decode($request->cat, true);
+
+        if ($decoded === false || !ctype_digit((string) $decoded)) {
+            abort(404);
         }
-        return view('frontend.detailpage.peraturan.index', compact('produkHukum'));
+
+        $categoryId = (int) $decoded;
     }
+
+    $produkHukum = ProdukHukum::where('judul', $judul)
+        ->when($categoryId, function ($q) use ($categoryId) {
+            $q->where('category_id', $categoryId);
+        })
+        ->firstOrFail();
+
+    // Increment dibaca (AMAN & ATOMIC)
+    $produkHukum->increment('dibaca');
+
+    return view('frontend.detailpage.peraturan.index', compact('produkHukum'));
+}
 
     public function importJson($year)
     {

@@ -5,10 +5,10 @@
     <!-- breadcrumb -->
     <div class="site-breadcrumb" style="background: url({{Storage::url(setting('site_banner'))}})">
         <div class="container">
-            <h2 class="breadcrumb-title">Produk Hukum</h2>
+            <h2 class="breadcrumb-title"> {{ $categoriSelected->name ?? 'Produk Hukum' }}</h2>
             <ul class="breadcrumb-menu">
                 <li><a href="{{ route('home') }}">Beranda</a></li>
-                <li class="active">Produk Hukum</li>
+                <li class="active"> {{ $categoriSelected->name ?? 'Produk Hukum' }}</li>
             </ul>
         </div>
     </div>
@@ -63,8 +63,8 @@
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="site-heading text-center">
-                        <span class="site-title-tagline"><i class="far fa-images"></i> Produk Hukum</span>
-                        <h2 class="site-title">Produk Hukum</h2>
+                        <span class="site-title-tagline"><i class="far fa-images"></i> {{ $categoriSelected->name ?? 'Produk Hukum' }}</span>
+                        <h2 class="site-title">{{ $categoriSelected->name ?? 'Produk Hukum' }}</h2>
                         <p>Kumpulan produk hukum dan peraturan.</p>
                     </div>
                 </div>
@@ -84,7 +84,14 @@
                                 <span class="event-time"><i class="far fa-eye"></i>Dibaca : {{ $produk->dibaca }} Kali</span>
                             </div>
                             <div class="event-btn">
-                                <a href="{{ route('produk-hukum.detail', urlencode($produk->judul)) }}" class="theme-btn-read-download">Baca<i class="fas fa-eye"></i></a>
+<a href="{{ route('produk-hukum.detail', [
+    'judul' => urlencode($produk->judul),
+]) }}?cat={{ base64_encode($produk->category_id) }}"
+   class="theme-btn-read-download">
+    Baca <i class="fas fa-eye"></i>
+</a>
+
+
                                 <a href="{{Storage::url($produk->file_produk_hukum)}}" target="_blank" class="theme-btn-read-download">Download<i class="fas fa-arrow-right-long"></i></a>
                             </div>
                         </div>

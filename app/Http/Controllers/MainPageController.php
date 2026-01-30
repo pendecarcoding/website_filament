@@ -206,6 +206,8 @@ $pageViewsPerVisit = $todayVisitors > 0
             $produkHukum = $query->latest()->paginate(10);
             $categories = Category::all();
 
+            $categoriSelected = Category::find($request->kategori);
+
             // Log successful searches
             Log::info('Successful search', [
                 'search' => $request->search,
@@ -215,7 +217,8 @@ $pageViewsPerVisit = $todayVisitors > 0
                 'results_count' => $produkHukum->total()
             ]);
 
-            return view('frontend.page.produk-hukum', compact('produkHukum', 'categories'));
+            return view('frontend.page.produk-hukum', compact('produkHukum', 'categories','categoriSelected'
+            ));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Log validation errors
             Log::warning('Search validation failed', [
