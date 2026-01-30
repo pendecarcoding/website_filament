@@ -52,7 +52,9 @@
                     <ul class="navbar-nav">
                         @foreach(Biostate\FilamentMenuBuilder\Models\MenuItem::whereHas('menu', function($query) {
                         $query->where('name', 'WEBSITE');
-                        })->whereNull('parent_id')->get() as $menuItem)
+                        })->whereNull('parent_id')
+                        ->orderBy('_lft')
+                        ->get() as $menuItem)
                         @if($menuItem->children->isEmpty())
                         <li class="nav-item">
                             <a class="nav-link {{ request()->url() == $menuItem->link ? 'active' : '' }}"
