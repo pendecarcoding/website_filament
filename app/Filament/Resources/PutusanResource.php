@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProdukHukumResource\Pages;
-use App\Filament\Resources\ProdukHukumResource\RelationManagers;
+use App\Filament\Resources\PutusanResource\Pages;
+use App\Filament\Resources\PutusanResource\RelationManagers;
 use App\Models\ProdukHukum;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -15,21 +15,23 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\RichEditor;
 
-class ProdukHukumResource extends Resource
+class PutusanResource extends Resource
 {
     protected static ?string $model = ProdukHukum::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-scale';
+
+
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
             ->whereHas('category', function ($query) {
-                $query->whereNotIn('name', [
+                $query->whereIn('name', [
                     'Mahkamah Agung',
                     'Mahkamah Konstitusi',
                     'PN Bengkalis',
@@ -47,12 +49,12 @@ class ProdukHukumResource extends Resource
      */
     public static function getModelLabel(): string
     {
-        return 'Produk Hukum';
+        return 'Putusan';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Produk Hukum'; // or 'Koperasi-Koperasi' if you want a different plural
+        return 'Putusan'; // or 'Koperasi-Koperasi' if you want a different plural
     }
     public static function getNavigationGroup(): ?string
     {
@@ -62,22 +64,20 @@ class ProdukHukumResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('no_peraturan'),
+                TextInput::make('no_peraturan')
+                ->label('Nomor Putusan'),
 
                 TextInput::make('judul'),
 
                 Select::make('category_id')
-                    ->label('Kategori')
+                    ->label('Jenis Putusan')
                     ->relationship('category', 'name')
                     ->required(),
 
                 Select::make('status')
                     ->label('Status')
                     ->options([
-                        'Berlaku' => 'Berlaku',
-                        'Tidak Berlaku' => 'Tidak Berlaku',
-                        'Dicabut' => 'Dicabut',
-                        'Mencabut' => 'Mencabut',
+                        'Inkrah' => 'Inkrah',
                     ])
                     ->default('Berlaku'),
 
@@ -92,16 +92,17 @@ class ProdukHukumResource extends Resource
                         'undo',
                         'redo',
                     ])
-                    ->columnSpanFull(),
+                    ->columnSpanFull()->visible(false),
 
                 DatePicker::make('tanggal_penetapan'),
 
-                DatePicker::make('tanggal_diundangkan'),
+                DatePicker::make('tanggal_diundangkan')->visible(false),
 
-                TextInput::make('no_lembaran_daerah'),
+                TextInput::make('no_lembaran_daerah')->visible(false),
 
                 FileUpload::make('file_produk_hukum')
                     ->directory('produk-hukum-files')
+                    ->label('Upload File Putusan (PDF)')
                     ->previewable(true)
                     ->maxSize(20480)
                     ->preserveFilenames()
@@ -149,9 +150,9 @@ class ProdukHukumResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProdukHukums::route('/'),
-            'create' => Pages\CreateProdukHukum::route('/create'),
-            'edit' => Pages\EditProdukHukum::route('/{record}/edit'),
+            'index' => Pages\ListPutusans::route('/'),
+            'create' => Pages\CreatePutusan::route('/create'),
+            'edit' => Pages\EditPutusan::route('/{record}/edit'),
         ];
     }
 }
