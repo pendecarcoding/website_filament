@@ -72,8 +72,26 @@ class ProdukHukumResource extends Resource
                 TextInput::make('judul'),
 
                 Select::make('category_id')
-                    ->label('Kategori')
-                    ->relationship('category', 'name')
+                    ->label('Jenis')
+                    ->relationship(
+                        name: 'category',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: function (Builder $query) {
+                            $query->whereNotIn('name', [
+                                'Mahkamah Agung',
+                                'Mahkamah Konstitusi',
+                                'PN Bengkalis',
+                                'PN Pekanbaru',
+                                'PTUN Pekanbaru',
+                                'PT Pekanbaru',
+                                'PTUN Medan',
+                                'Naskah Akademik',
+                                'Edaran',
+                                'Ranperda',
+                                'Risalah',
+                            ]);
+                        }
+                    )
                     ->required(),
 
                 Select::make('status')
