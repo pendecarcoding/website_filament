@@ -65,13 +65,27 @@ class PutusanResource extends Resource
         return $form
             ->schema([
                 TextInput::make('no_peraturan')
-                ->label('Nomor Putusan'),
+                    ->label('Nomor Putusan'),
 
                 TextInput::make('judul'),
 
                 Select::make('category_id')
                     ->label('Jenis Putusan')
-                    ->relationship('category', 'name')
+                    ->relationship(
+                        name: 'category',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: function (Builder $query) {
+                            $query->whereIn('name', [
+                                'Mahkamah Agung',
+                                'Mahkamah Konstitusi',
+                                'PN Bengkalis',
+                                'PN Pekanbaru',
+                                'PTUN Pekanbaru',
+                                'PT Pekanbaru',
+                                'PTUN Medan',
+                            ]);
+                        }
+                    )
                     ->required(),
 
                 Select::make('status')
