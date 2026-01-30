@@ -42,7 +42,7 @@
     <style>
         .searh-wrapper {
             padding: 10px 41px 29px;
-            background-color: #116e63;
+            background-color: #012758;
             /* margin: 20px; */
             background-size: contain;
             background-image: url(<?php echo $mapbg ?>);
