@@ -54,6 +54,8 @@ class MonografiResource extends Resource
                     'Edaran',
                     'Ranperda',
                     'Risalah',
+                    'Kajian Hukum',
+                    'Hasil Analisis dan Evaluasi',
                 ]);
             });
     }
@@ -79,6 +81,8 @@ class MonografiResource extends Resource
                                 'Edaran',
                                 'Ranperda',
                                 'Risalah',
+                                'Kajian Hukum',
+                                'Hasil Analisis dan Evaluasi',
                             ]);
                         }
                     )
@@ -95,7 +99,7 @@ class MonografiResource extends Resource
                     ])
                     ->default('Berlaku'),
 
-                 TextInput::make('nama_instansi')->visible(true)->label('Instansi Pembuat'),
+                TextInput::make('nama_instansi')->visible(true)->label('Instansi Pembuat'),
 
                 RichEditor::make('abstract')
                     ->label('Abstrak')

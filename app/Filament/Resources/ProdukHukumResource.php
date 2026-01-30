@@ -42,6 +42,8 @@ class ProdukHukumResource extends Resource
                     'Edaran',
                     'Ranperda',
                     'Risalah',
+                    'Kajian Hukum',
+                    'Hasil Analisis dan Evaluasi',
                 ]);
             });
     }
@@ -89,6 +91,8 @@ class ProdukHukumResource extends Resource
                                 'Edaran',
                                 'Ranperda',
                                 'Risalah',
+                                'Kajian Hukum',
+                                'Hasil Analisis dan Evaluasi',
                             ]);
                         }
                     )
