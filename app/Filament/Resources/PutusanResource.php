@@ -114,17 +114,17 @@ class PutusanResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('no_peraturan')->searchable(),
+                TextColumn::make('no_peraturan')->label('No Putusan')->searchable(),
                 TextColumn::make('judul')->limit(50)->searchable(),
                 TextColumn::make('file_produk_hukum')
                     ->label('Preview File')
                     ->formatStateUsing(fn($state) => 'Preview')
                     ->url(fn($record) => asset('storage/' . $record->file_produk_hukum), true)
                     ->openUrlInNewTab(),
-                TextColumn::make('category.name')->label('Kategori')->sortable(),
+                TextColumn::make('category.name')->label('Jenis Putusan')->sortable(),
                 TextColumn::make('tanggal_penetapan')->date(),
-                TextColumn::make('tanggal_diundangkan')->date(),
-                TextColumn::make('no_lembaran_daerah'),
+                TextColumn::make('tanggal_diundangkan')->visible(false)->date(),
+                TextColumn::make('no_lembaran_daerah')->visible(false),
             ])
             ->defaultSort('tanggal_penetapan', 'desc')
             ->filters([
