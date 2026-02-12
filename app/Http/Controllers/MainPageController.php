@@ -94,7 +94,8 @@ class MainPageController extends Controller
         $galleryItems = $this->getGalleryItems(request()->get('page', 1), 6);
         $newsItems = $this->getNewsItems(request()->get('page', 1), 6);
 
-$html = Http::get($this->chartToday)->body();
+$html = Http::withoutVerifying()->get($this->chartToday)->body();
+
 
 preg_match_all('/_init_from_JSON\("({.*?})"\)/s', $html, $matches);
 
