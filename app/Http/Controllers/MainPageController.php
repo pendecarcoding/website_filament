@@ -344,7 +344,7 @@ $pageViewsPerVisit = $todayVisitors > 0
      */
     private function getGalleryItems($page = 1, $perPage = 10)
     {
-        $cacheKey = "gallery_items_page_{$page}_per_page_{$perPage}";
+        $cacheKey = "gallery_items_v2_page_{$page}_per_page_{$perPage}";
 
         // Try to get from cache (Redis or regular cache)
         $cachedData = $this->getFromCache($cacheKey);
@@ -362,48 +362,33 @@ $pageViewsPerVisit = $todayVisitors > 0
 
             $crawler = new Crawler($html);
 
-            // Check if the main container exists
-            $mainContainer = $crawler->filter('.section.panel.overflow-hidden.swiper-parent.uc-dark');
-            if ($mainContainer->count() === 0) {
-                Log::warning('Gallery container not found in the HTML');
-                return new \Illuminate\Pagination\LengthAwarePaginator([], 0, $perPage);
-            }
-
             $galleryItems = [];
 
-            // Find all gallery items in the swiper section
+            // Filter by gallery detail links so we only keep photo gallery cards.
             $crawler->filter('.swiper-slide')->each(function (Crawler $node) use (&$galleryItems) {
                 try {
-                    // Get title
                     $titleNode = $node->filter('.post-title a');
                     if ($titleNode->count() === 0) {
-                        Log::warning('Title element not found in gallery item');
                         return;
                     }
+
                     $title = $titleNode->text();
                     $link = $titleNode->attr('href');
 
-                    // Get image
-                    $imageNode = $node->filter('.video-cover');
-                    if ($imageNode->count() === 0) {
-                        Log::warning('Image element not found in gallery item');
+                    if (!$link || strpos($link, '/web/detailfoto/') === false) {
                         return;
                     }
-                    $imageUrl = $imageNode->attr('src');
 
-                    // Get date
+                    $imageNode = $node->filter('img.video-cover, .featured-image img, .featured-video img');
+                    $imageUrl = $this->extractScrapedImageUrl($imageNode);
                     $dateNode = $node->filter('.post-date span');
-                    if ($dateNode->count() === 0) {
-                        Log::warning('Date element not found in gallery item');
-                        return;
-                    }
-                    $date = $dateNode->text();
+                    $date = $dateNode->count() ? $dateNode->text() : null;
 
                     $galleryItems[] = [
                         'title' => $title,
                         'link' => $link,
                         'image_url' => $imageUrl,
-                        'date' => $date
+                        'date' => $date,
                     ];
                 } catch (\Exception $e) {
                     Log::warning('Error processing gallery item: ' . $e->getMessage());
@@ -526,5 +511,22 @@ $pageViewsPerVisit = $todayVisitors > 0
     public function privacyPolicy(Request $r)
     {
         return response()->view('privacy-policy');
+    }
+
+    private function extractScrapedImageUrl(Crawler $imageNode): ?string
+    {
+        if ($imageNode->count() === 0) {
+            return null;
+        }
+
+        foreach (['data-src', 'data-lazy-src', 'src'] as $attribute) {
+            $value = $imageNode->attr($attribute);
+
+            if ($value) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 }

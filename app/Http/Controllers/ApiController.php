@@ -373,7 +373,7 @@ class ApiController extends Controller
 
     private function fetchGalleryPage(int $page, int $perPage): array
     {
-        $cacheKey = "api_gallery_items_page_{$page}_per_page_{$perPage}";
+        $cacheKey = "api_gallery_items_v2_page_{$page}_per_page_{$perPage}";
 
         if (Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
@@ -394,13 +394,20 @@ class ApiController extends Controller
                         return;
                     }
 
-                    $imageNode = $node->filter('.video-cover');
+                    $link = $titleNode->attr('href');
+
+                    if (!$link || !Str::contains($link, '/web/detailfoto/')) {
+                        return;
+                    }
+
+                    $imageNode = $node->filter('img.video-cover, .featured-image img, .featured-video img');
                     $dateNode = $node->filter('.post-date span');
+                    $imageUrl = $this->extractScrapedImageUrl($imageNode);
 
                     $galleryItems[] = [
                         'title' => $titleNode->text(),
-                        'link' => $titleNode->attr('href'),
-                        'image_url' => $imageNode->count() ? $this->absoluteUrl($imageNode->attr('src')) : null,
+                        'link' => $link,
+                        'image_url' => $imageUrl ? $this->absoluteUrl($imageUrl) : null,
                         'date' => $dateNode->count() ? $dateNode->text() : null,
                     ];
                 } catch (\Exception $e) {
@@ -586,5 +593,22 @@ class ApiController extends Controller
         }
 
         return rtrim($this->baseUrl, '/') . '/' . ltrim($url, '/');
+    }
+
+    private function extractScrapedImageUrl(Crawler $imageNode): ?string
+    {
+        if ($imageNode->count() === 0) {
+            return null;
+        }
+
+        foreach (['data-src', 'data-lazy-src', 'src'] as $attribute) {
+            $value = $imageNode->attr($attribute);
+
+            if ($value) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 }
